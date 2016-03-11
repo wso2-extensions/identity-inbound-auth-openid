@@ -1,1 +1,1 @@
-# identity-inbound-auth-openid
+# identity-inbound-auth-oauth

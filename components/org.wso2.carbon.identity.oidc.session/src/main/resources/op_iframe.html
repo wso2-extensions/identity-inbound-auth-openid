@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <script src="https://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/sha256.js"></script>
+    <script language="JavaScript" type="text/javascript">
+        window.addEventListener("message", receiveMessage, false);
+        function receiveMessage(e) {
+            var origin = "${CLIENT_ORIGIN}"; // origin from client_id
+            if (e.origin !== origin) {
+                return;
+            }
+
+            var stat = '';
+            if (e.data === null || e.data == 'null' || e.data.length == 0) {
+                stat = 'error';
+            } else {
+                var client_id = e.data.split(' ')[0];
+                var session_state = e.data.split(' ')[1];
+
+                if (client_id === null || client_id.length == 0 || client_id === 'null' || session_state === null ||
+                        session_state.length == 0 || session_state == 'null') {
+                    stat = 'error';
+                } else {
+                    var salt = session_state.split('.')[1];
+                    var op_browser_state = getOPBrowserState(); // from Cookie or use API access
+                    var calculated_session_state = CryptoJS.SHA256(client_id + ' ' + e.origin + ' ' + op_browser_state + ' ' + salt) + "." + salt;
+
+                    if (session_state == calculated_session_state) {
+                        stat = 'unchanged';
+                    } else {
+                        stat = 'changed';
+                    }
+                }
+            }
+
+            e.source.postMessage(stat, e.origin);
+        }
+
+        function getOPBrowserState() {
+            var name = "opbs=";
+            var cookie = document.cookie + ";";
+            var start = cookie.indexOf(name);
+            if (start != -1) {
+                var end = cookie.indexOf(";", start);
+                return cookie.substring(start + name.length, end);
+            }
+
+            return 'null';
+        }
+    </script>
+</head>
+<body/>
+</html>
