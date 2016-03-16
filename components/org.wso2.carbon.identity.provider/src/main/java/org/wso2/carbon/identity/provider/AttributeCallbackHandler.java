@@ -36,11 +36,17 @@ import org.opensaml.saml2.core.AttributeValue;
 import org.opensaml.xml.XMLObjectBuilderFactory;
 import org.opensaml.xml.schema.XSString;
 import org.opensaml.xml.schema.impl.XSStringBuilder;
+import org.wso2.carbon.context.CarbonContext;
+import org.wso2.carbon.identity.application.common.IdentityApplicationManagementException;
+import org.wso2.carbon.identity.application.common.model.ClaimMapping;
+import org.wso2.carbon.identity.application.common.model.ServiceProvider;
+import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
 import org.wso2.carbon.identity.base.IdentityConstants;
 import org.wso2.carbon.identity.base.IdentityException;
 import org.wso2.carbon.identity.core.IdentityClaimManager;
 import org.wso2.carbon.identity.core.util.IdentityCoreConstants;
 import org.wso2.carbon.identity.core.util.IdentityTenantUtil;
+import org.wso2.carbon.identity.provider.internal.IdentityProviderServiceComponent;
 import org.wso2.carbon.user.api.UserStoreException;
 import org.wso2.carbon.user.core.UserCoreConstants;
 import org.wso2.carbon.user.core.UserStoreManager;
@@ -69,15 +75,19 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
         SAMLAttributeCallback attrCallback = null;
         RahasData data = null;
         OMElement claimElem = null;
+        String claimDialect = null;
         String userIdentifier = null;
         String[] splitArr = null;
         IdentityAttributeService[] attributeCallbackServices = null;
+        String endPointReference = null;
 
         if (callback instanceof SAMLAttributeCallback) {
             attrCallback = (SAMLAttributeCallback) callback;
             data = attrCallback.getData();
             claimElem = data.getClaimElem();
+            claimDialect = data.getClaimDialect();
             userIdentifier = data.getPrincipal().getName();
+            endPointReference = data.getAppliesToAddress();
 
             if (userIdentifier != null) {
                     /*Extract 'Common Name' as the user id if authenticated
@@ -88,37 +98,90 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
                 }
             }
 
-            try {
-                processClaimData(data, claimElem);
-                loadClaims(claimElem, userIdentifier);
-                populateClaimValues(userIdentifier, attrCallback);
-            } catch (IdentityProviderException e) {
-                log.error("Error occurred while populating claim data", e);
-            }
-
-            attributeCallbackServices = IdentityAttributeServiceStore.getAttributeServices();
-            for (int i = 0; i < attributeCallbackServices.length; i++) {
+            if (StringUtils.isNotEmpty(claimDialect) && claimElem != null) {
                 try {
-                    attributeCallbackServices[i].handle(attrCallback);
-                } catch (Exception e) {
-                    log.error("Error occurred while calling attribute callback", e);
+                    processClaimData(data, claimElem);
+                    loadClaims(claimElem, userIdentifier);
+                    populateClaimValues(userIdentifier, attrCallback);
+                } catch (IdentityProviderException e) {
+                    log.error("Error occurred while populating claim data", e);
                 }
-            }
 
-            if (RahasConstants.TOK_TYPE_SAML_20.equals(data.getTokenType())) {
-                if (attrCallback.getSAML2Attributes() == null
-                        || attrCallback.getSAML2Attributes().length == 0) {
-                    attrCallback.addAttributes(getSAML2Attribute("Name", "Colombo",
-                            "https://rahas.apache.org/saml/attrns"));
+                attributeCallbackServices = IdentityAttributeServiceStore.getAttributeServices();
+                for (int i = 0; i < attributeCallbackServices.length; i++) {
+                    try {
+                        attributeCallbackServices[i].handle(attrCallback);
+                    } catch (Exception e) {
+                        log.error("Error occurred while calling attribute callback", e);
+                    }
                 }
+
+                if (RahasConstants.TOK_TYPE_SAML_20.equals(data.getTokenType())) {
+                    if (attrCallback.getSAML2Attributes() == null
+                            || attrCallback.getSAML2Attributes().length == 0) {
+                        attrCallback.addAttributes(getSAML2Attribute("Name", "Colombo",
+                                "https://rahas.apache.org/saml/attrns"));
+                    }
+                } else {
+                    if (attrCallback.getAttributes() == null
+                            || attrCallback.getAttributes().length == 0) {
+                        SAMLAttribute attribute = new SAMLAttribute("Name",
+                                "https://rahas.apache.org/saml/attrns", null, -1, Arrays
+                                .asList(new String[]{"Colombo/Rahas"}));
+                        attrCallback.addAttributes(attribute);
+                    }
+                }
+
             } else {
-                if (attrCallback.getAttributes() == null
-                        || attrCallback.getAttributes().length == 0) {
-                    SAMLAttribute attribute = new SAMLAttribute("Name",
-                            "https://rahas.apache.org/saml/attrns", null, -1, Arrays
-                            .asList(new String[]{"Colombo/Rahas"}));
-                    attrCallback.addAttributes(attribute);
+                String tenantDomain = CarbonContext.getThreadLocalCarbonContext().getTenantDomain();
+                ApplicationManagementService applicationManagementService =
+                        IdentityProviderServiceComponent.getApplicationManagementService();
+                try {
+                    ServiceProvider serviceProvider =
+                            applicationManagementService.getServiceProviderByClientId(endPointReference, "wstrust",
+                                    tenantDomain);
+                    ClaimMapping[] claimMappings = serviceProvider.getClaimConfig().getClaimMappings();
+                    if (claimMappings.length == 0) {
+                        SAMLAttribute attribute = new SAMLAttribute("Name",
+                                "https://rahas.apache.org/saml/attrns", null, -1, Arrays
+                                .asList(new String[]{"Colombo/Rahas"}));
+                        attrCallback.addAttributes(attribute);
+                    }
+                    for (int i = 0; i < claimMappings.length; i++) {
+                        String localClaimUri = claimMappings[i].getLocalClaim().getClaimUri();
+                        String remoteClaimUri = claimMappings[i].getRemoteClaim().getClaimUri();
+
+                        if (StringUtils.isNotBlank(localClaimUri) && StringUtils.isNotBlank(remoteClaimUri)) {
+                            String remoteClaimSuffixValue = remoteClaimUri.substring(remoteClaimUri.lastIndexOf('/') + 1);
+                            String remoteClaimPrefixValue = remoteClaimUri.substring(0, remoteClaimUri.lastIndexOf('/'));
+                            String localClaimValue = null;
+
+                            if (StringUtils.isNotBlank(remoteClaimSuffixValue) &&
+                                    StringUtils.isNotBlank(remoteClaimPrefixValue)) {
+                                localClaimValue = IdentityProviderServiceComponent.getRealmService().
+                                        getBootstrapRealm().getUserStoreManager().
+                                        getUserClaimValue(userIdentifier, localClaimUri, "default");
+
+                                if (StringUtils.isEmpty(localClaimValue)) {
+                                    localClaimValue = new String();
+                                    if (log.isDebugEnabled()) {
+                                        log.debug("Claim Values haven't properly set");
+                                    }
+                                }
+                                SAMLAttribute attribute = new SAMLAttribute(remoteClaimSuffixValue,
+                                        remoteClaimPrefixValue, null, -1, Arrays
+                                        .asList(new String[]{localClaimValue}));
+                                attrCallback.addAttributes(attribute);
+                            }
+
+                        }
+                    }
+                } catch (IdentityApplicationManagementException e) {
+                    throw new SAMLException("Error while loading SP specific claims", e);
+                } catch (org.wso2.carbon.user.core.UserStoreException e) {
+                    throw new SAMLException("Error while loading claims of the user", e);
                 }
+
             }
         }
     }

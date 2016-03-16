@@ -23,6 +23,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
+import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
 import org.wso2.carbon.identity.core.util.IdentityCoreInitializedEvent;
 import org.wso2.carbon.identity.provider.IdentityAttributeService;
 import org.wso2.carbon.identity.provider.IdentityAttributeServiceStore;
@@ -41,6 +42,11 @@ import javax.servlet.ServletContext;
  * interface="org.wso2.carbon.registry.core.service.RegistryService"
  * cardinality="1..1" policy="dynamic" bind="setRegistryService"
  * unbind="unsetRegistryService"
+ * @scr.reference name="identity.application.management.component"
+ * interface="org.wso2.carbon.identity.application.mgt.ApplicationManagementService"
+ * cardinality="1..1" policy="dynamic"
+ * bind="setApplicationMgtService"
+ * unbind="unsetApplicationMgtService"
  * @scr.reference name="config.context.service"
  * interface="org.wso2.carbon.utils.ConfigurationContextService" cardinality="1..1"
  * policy="dynamic" bind="setConfigurationContextService"
@@ -62,6 +68,7 @@ public class IdentityProviderServiceComponent {
     private static RealmService realmService;
     private static RegistryService registryService;
     private static ServiceRegistration userEventServiceRegistration;
+    private static ApplicationManagementService applicationManagementService;
 
     /**
      *
@@ -92,6 +99,10 @@ public class IdentityProviderServiceComponent {
 
     public static RegistryService getRegistryService() {
         return registryService;
+    }
+
+    public static ApplicationManagementService getApplicationManagementService() {
+        return applicationManagementService;
     }
 
     /**
@@ -145,6 +156,20 @@ public class IdentityProviderServiceComponent {
         if (log.isDebugEnabled()) {
             log.debug("RegistryService unset in Identity Provider bundle");
         }
+    }
+
+    protected void setApplicationMgtService(ApplicationManagementService applicationMgtService) {
+        if (log.isDebugEnabled()) {
+            log.debug((Object) "ApplicationManagementService set in Identity Provider bundle");
+        }
+        applicationManagementService = applicationMgtService;
+    }
+
+    protected void unsetApplicationMgtService(ApplicationManagementService applicationMgtService) {
+        if (log.isDebugEnabled()) {
+            log.debug((Object) "ApplicationManagementService unset in Identity Provider bundle");
+        }
+        applicationManagementService = null;
     }
 
     /**
