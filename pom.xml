@@ -34,9 +34,9 @@
     <url>http://wso2.org</url>
 
     <scm>
-        <url>https://github.com/wso2-extensions/identity-inbound-auth-saml.git</url>
-        <developerConnection>scm:git:https://github.com/wso2-extensions/identity-inbound-auth-saml.git</developerConnection>
-        <connection>scm:git:https://github.com/wso2-extensions/identity-inbound-auth-saml.git</connection>
+        <url>https://github.com/wso2-extensions/identity-inbound-auth-openid.git</url>
+        <developerConnection>scm:git:https://github.com/wso2-extensions/identity-inbound-auth-openid.git</developerConnection>
+        <connection>scm:git:https://github.com/wso2-extensions/identity-inbound-auth-openid.git</connection>
         <tag>HEAD</tag>
     </scm>
 
