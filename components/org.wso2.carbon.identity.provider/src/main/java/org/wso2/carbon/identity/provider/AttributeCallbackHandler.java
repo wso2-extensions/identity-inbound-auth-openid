@@ -141,6 +141,12 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
                             applicationManagementService.getServiceProviderByClientId(endPointReference, "wstrust",
                                     tenantDomain);
                     ClaimMapping[] claimMappings = serviceProvider.getClaimConfig().getClaimMappings();
+                    if (claimMappings.length == 0) {
+                        SAMLAttribute attribute = new SAMLAttribute("Name",
+                                "https://rahas.apache.org/saml/attrns", null, -1, Arrays
+                                .asList(new String[]{"Colombo/Rahas"}));
+                        attrCallback.addAttributes(attribute);
+                    }
                     for (int i = 0; i < claimMappings.length; i++) {
                         String localClaimUri = claimMappings[i].getLocalClaim().getClaimUri();
                         String remoteClaimUri = claimMappings[i].getRemoteClaim().getClaimUri();
