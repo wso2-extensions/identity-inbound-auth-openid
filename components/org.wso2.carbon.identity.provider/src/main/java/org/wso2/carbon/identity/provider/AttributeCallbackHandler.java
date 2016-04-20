@@ -115,23 +115,6 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
                         log.error("Error occurred while calling attribute callback", e);
                     }
                 }
-
-                if (RahasConstants.TOK_TYPE_SAML_20.equals(data.getTokenType())) {
-                    if (attrCallback.getSAML2Attributes() == null
-                            || attrCallback.getSAML2Attributes().length == 0) {
-                        attrCallback.addAttributes(getSAML2Attribute("Name", "Colombo",
-                                "https://rahas.apache.org/saml/attrns"));
-                    }
-                } else {
-                    if (attrCallback.getAttributes() == null
-                            || attrCallback.getAttributes().length == 0) {
-                        SAMLAttribute attribute = new SAMLAttribute("Name",
-                                "https://rahas.apache.org/saml/attrns", null, -1, Arrays
-                                .asList(new String[]{"Colombo/Rahas"}));
-                        attrCallback.addAttributes(attribute);
-                    }
-                }
-
             } else {
                 String tenantDomain = CarbonContext.getThreadLocalCarbonContext().getTenantDomain();
                 ApplicationManagementService applicationManagementService =
@@ -141,12 +124,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
                             applicationManagementService.getServiceProviderByClientId(endPointReference, "wstrust",
                                     tenantDomain);
                     ClaimMapping[] claimMappings = serviceProvider.getClaimConfig().getClaimMappings();
-                    if (claimMappings.length == 0) {
-                        SAMLAttribute attribute = new SAMLAttribute("Name",
-                                "https://rahas.apache.org/saml/attrns", null, -1, Arrays
-                                .asList(new String[]{"Colombo/Rahas"}));
-                        attrCallback.addAttributes(attribute);
-                    }
+
                     for (int i = 0; i < claimMappings.length; i++) {
                         String localClaimUri = claimMappings[i].getLocalClaim().getClaimUri();
                         String remoteClaimUri = claimMappings[i].getRemoteClaim().getClaimUri();
