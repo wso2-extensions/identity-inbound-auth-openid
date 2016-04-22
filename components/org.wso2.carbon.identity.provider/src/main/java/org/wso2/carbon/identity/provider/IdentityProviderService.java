@@ -42,6 +42,9 @@ import javax.servlet.http.HttpSession;
  * This services has the functionality related to Information Cards / OpenID dash-board
  * functionality in the UI. To access this service, users should have 'login' permission. Only the
  * functionality related to logged in user can be performed.
+ *
+ * @deprecated OpenID 2.0 support is deprecated, since it's now an obsolete specification
+ * and has been superseded by OpenID Connect
  */
 public class IdentityProviderService extends AbstractAdmin {
 

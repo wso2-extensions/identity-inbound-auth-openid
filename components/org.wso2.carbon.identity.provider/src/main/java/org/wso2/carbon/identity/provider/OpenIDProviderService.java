@@ -84,7 +84,8 @@ import java.util.StringTokenizer;
 /**
  * The OpenID Provider service class.
  *
- * @author WSO2Inc
+ * @deprecated OpenID 2.0 support is deprecated, since it's now an obsolete specification
+ * and has been superseded by OpenID Connect
  */
 public class OpenIDProviderService {
 
