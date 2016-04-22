@@ -39,6 +39,9 @@ import java.util.Map;
  * This services has the functionality related to XMPP configuration functionality in the UI. To
  * access this service, users should have 'login' permission. Only the functionality related to
  * logged in user can be performed.
+ *
+ * @deprecated XMPP based authentication with OpenID 2.0 is deprecated, since it's now an obsolete specification
+ * and has been superseded by OpenID Connect
  */
 public class XMPPConfigurationService {
 
