@@ -114,6 +114,93 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.ws.security.wso2</groupId>
+                <artifactId>wss4j</artifactId>
+                <version>${wss4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rampart.wso2</groupId>
+                <artifactId>rampart-trust</artifactId>
+                <version>${rampart.wso2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.orbit.org.openid4java</groupId>
+                <artifactId>openid4java</artifactId>
+                <version>${openid4java.wso2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.orbit.org.opensaml</groupId>
+                <artifactId>opensaml</artifactId>
+                <version>${opensaml2.wso2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.igniterealtime.smack.wso2</groupId>
+                <artifactId>smack</artifactId>
+                <version>${smack.wso2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.igniterealtime.smack.wso2</groupId>
+                <artifactId>smackx</artifactId>
+                <version>${smackx.wso2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.minidev</groupId>
+                <artifactId>json-smart</artifactId>
+                <version>${json-smart.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.identity</groupId>
+                <artifactId>org.wso2.carbon.identity.provider</artifactId>
+                <version>${identity.framework.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guice.wso2</groupId>
+                <artifactId>guice</artifactId>
+                <version>${google.guice.wso2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.ehcache.wso2</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>${ehcache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.step2.wso2</groupId>
+                <artifactId>step2</artifactId>
+                <version>${google.step2.wso2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jdom.wso2</groupId>
+                <artifactId>jdom</artifactId>
+                <version>${jdom.wso2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava.wso2</groupId>
+                <artifactId>guava</artifactId>
+                <version>${google.guava.wso2.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <identity.framework.version>5.0.9-SNAPSHOT</identity.framework.version>
+
+        <ehcache.version>1.5.0.wso2v3</ehcache.version>
+        <google.guice.wso2.version>3.0.wso2v1</google.guice.wso2.version>
+        <google.step2.wso2.version>1.0.wso2v2</google.step2.wso2.version>
+        <google.guava.wso2.version>12.0.0.wso2v1</google.guava.wso2.version>
+        <json-smart.version>1.3</json-smart.version>
+        <jdom.wso2.version>1.0.0.wso2v1</jdom.wso2.version>
+        <openid4java.wso2.version>1.0.0.wso2v2</openid4java.wso2.version>
+        <opensaml2.wso2.version>2.6.4.wso2v2</opensaml2.wso2.version>
+        <smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
+        <smackx.wso2.version>3.0.4.wso2v1</smackx.wso2.version>
+        <rampart.wso2.version>1.6.1.wso2v20</rampart.wso2.version>
+        <wss4j.version>1.5.11.wso2v13</wss4j.version>
+    </properties>
+
     <modules>
         <module>components/org.wso2.carbon.identity.provider</module>
         <module>components/org.wso2.carbon.identity.provider.openid.stub</module>
