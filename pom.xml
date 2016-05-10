@@ -26,7 +26,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>identity-inbound-auth-openid</artifactId>
-    <version>5.0.9-SNAPSHOT</version> 
+    <version>5.1.0</version> 
     <packaging>pom</packaging>
     <name>WSO2 Carbon Openid module</name>
     <description>
@@ -38,7 +38,7 @@
         <url>https://github.com/wso2-extensions/identity-inbound-auth-openid.git</url>
         <developerConnection>scm:git:https://github.com/wso2-extensions/identity-inbound-auth-openid.git</developerConnection>
         <connection>scm:git:https://github.com/wso2-extensions/identity-inbound-auth-openid.git</connection>
-        <tag>HEAD</tag>
+        <tag>v5.1.0</tag>
     </scm>
 
     <repositories>
@@ -186,7 +186,7 @@
     </dependencyManagement>
 
     <properties>
-        <identity.inbound.auth.openid.version>5.0.9-SNAPSHOT</identity.inbound.auth.openid.version>
+        <identity.inbound.auth.openid.version>5.1.0</identity.inbound.auth.openid.version>
 
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
         <google.guice.wso2.version>3.0.wso2v1</google.guice.wso2.version>
