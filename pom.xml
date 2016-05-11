@@ -21,11 +21,12 @@
     <parent>
         <groupId>org.wso2.carbon.identity</groupId>
         <artifactId>identity-extension-parent</artifactId>
-        <version>5.0.9-SNAPSHOT</version>
+        <version>5.1.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>identity-inbound-auth-openid</artifactId>
+    <version>5.1.1-SNAPSHOT</version>    
     <packaging>pom</packaging>
     <name>WSO2 Carbon Openid module</name>
     <description>
@@ -185,7 +186,7 @@
     </dependencyManagement>
 
     <properties>
-        <identity.inbound.auth.openid.version>5.0.9-SNAPSHOT</identity.inbound.auth.openid.version>
+        <identity.inbound.auth.openid.version>5.1.1-SNAPSHOT</identity.inbound.auth.openid.version>
 
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
         <google.guice.wso2.version>3.0.wso2v1</google.guice.wso2.version>
