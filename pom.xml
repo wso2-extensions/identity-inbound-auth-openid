@@ -214,6 +214,7 @@
     <modules>
         <module>components/org.wso2.carbon.identity.provider</module>
         <module>components/org.wso2.carbon.identity.provider.openid.stub</module>
+        <module>components/org.wso2.carbon.identity.provider.stub</module>
         <module>features/org.wso2.carbon.identity.provider.server.feature</module>
     </modules>
 
