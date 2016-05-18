@@ -138,16 +138,6 @@
                 <version>${opensaml2.wso2.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.igniterealtime.smack.wso2</groupId>
-                <artifactId>smack</artifactId>
-                <version>${smack.wso2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.igniterealtime.smack.wso2</groupId>
-                <artifactId>smackx</artifactId>
-                <version>${smackx.wso2.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>net.minidev</groupId>
                 <artifactId>json-smart</artifactId>
                 <version>${json-smart.version}</version>
@@ -196,8 +186,6 @@
         <jdom.wso2.version>1.0.0.wso2v1</jdom.wso2.version>
         <openid4java.wso2.version>1.0.0.wso2v2</openid4java.wso2.version>
         <opensaml2.wso2.version>2.6.4.wso2v2</opensaml2.wso2.version>
-        <smack.wso2.version>3.0.4.wso2v1</smack.wso2.version>
-        <smackx.wso2.version>3.0.4.wso2v1</smackx.wso2.version>
         <rampart.wso2.version>1.6.1.wso2v20</rampart.wso2.version>
         <wss4j.version>1.5.11.wso2v13</wss4j.version>
 
