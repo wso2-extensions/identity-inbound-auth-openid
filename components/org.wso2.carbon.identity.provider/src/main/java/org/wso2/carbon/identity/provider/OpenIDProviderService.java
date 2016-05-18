@@ -115,16 +115,16 @@ public class OpenIDProviderService {
         String domainName = MultitenantUtils.getDomainNameFromOpenId(openID);
         String tenantUser = MultitenantUtils.getTenantAwareUsername(userName);
 
-        boolean isAutheticated = false;
+        boolean isAuthenticated = false;
         try {
-            isAutheticated = IdentityTenantUtil.getRealm(domainName, userName).getUserStoreManager().authenticate(
+            isAuthenticated = IdentityTenantUtil.getRealm(domainName, userName).getUserStoreManager().authenticate(
                     tenantUser, password);
 
         } catch (UserStoreException | IdentityException e) {
             throw new IdentityProviderException("Error while authenticating with OpenID " + openID, e);
         }
 
-        if (isAutheticated) {
+        if (isAuthenticated) {
             MessageContext msgContext = MessageContext.getCurrentMessageContext();
             if (msgContext != null) {
                 HttpServletRequest request =
@@ -136,7 +136,7 @@ public class OpenIDProviderService {
             }
         }
 
-        return isAutheticated;
+        return isAuthenticated;
     }
 
     /**
