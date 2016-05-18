@@ -172,20 +172,6 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="doXMPPBasedMultiFactorAuthForInfocard">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="doXMPPBasedMultiFactorAuthForInfocardResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
             <xs:element name="authenticateWithOpenID">
                 <xs:complexType>
                     <xs:sequence>
@@ -315,12 +301,6 @@
     <wsdl:message name="getOpenIDAuthResponseResponse">
         <wsdl:part name="parameters" element="ns1:getOpenIDAuthResponseResponse"/>
     </wsdl:message>
-    <wsdl:message name="doXMPPBasedMultiFactorAuthForInfocardRequest">
-        <wsdl:part name="parameters" element="ns1:doXMPPBasedMultiFactorAuthForInfocard"/>
-    </wsdl:message>
-    <wsdl:message name="doXMPPBasedMultiFactorAuthForInfocardResponse">
-        <wsdl:part name="parameters" element="ns1:doXMPPBasedMultiFactorAuthForInfocardResponse"/>
-    </wsdl:message>
     <wsdl:message name="signInWithInfoCardRequest">
         <wsdl:part name="parameters" element="ns1:signInWithInfoCard"/>
     </wsdl:message>
@@ -373,14 +353,6 @@
             <wsdl:input message="axis2:getOpenIDAuthResponseRequest" wsaw:Action="urn:getOpenIDAuthResponse"/>
             <wsdl:output message="axis2:getOpenIDAuthResponseResponse" wsaw:Action="urn:getOpenIDAuthResponseResponse"/>
             <wsdl:fault message="axis2:Exception" name="Exception" wsaw:Action="urn:getOpenIDAuthResponseException"/>
-        </wsdl:operation>
-        <wsdl:operation name="doXMPPBasedMultiFactorAuthForInfocard">
-            <wsdl:input message="axis2:doXMPPBasedMultiFactorAuthForInfocardRequest"
-                        wsaw:Action="urn:doXMPPBasedMultiFactorAuthForInfocard"/>
-            <wsdl:output message="axis2:doXMPPBasedMultiFactorAuthForInfocardResponse"
-                         wsaw:Action="urn:doXMPPBasedMultiFactorAuthForInfocardResponse"/>
-            <wsdl:fault message="axis2:Exception" name="Exception"
-                        wsaw:Action="urn:doXMPPBasedMultiFactorAuthForInfocardException"/>
         </wsdl:operation>
         <wsdl:operation name="signInWithInfoCard">
             <wsdl:input message="axis2:signInWithInfoCardRequest" wsaw:Action="urn:signInWithInfoCard"/>
@@ -457,18 +429,6 @@
         </wsdl:operation>
         <wsdl:operation name="signInWithInfoCard">
             <soap:operation soapAction="urn:signInWithInfoCard" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-            <wsdl:fault name="Exception">
-                <soap:fault use="literal" name="Exception"/>
-            </wsdl:fault>
-        </wsdl:operation>
-        <wsdl:operation name="doXMPPBasedMultiFactorAuthForInfocard">
-            <soap:operation soapAction="urn:doXMPPBasedMultiFactorAuthForInfocard" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -590,18 +550,6 @@
                 <soap12:fault use="literal" name="Exception"/>
             </wsdl:fault>
         </wsdl:operation>
-        <wsdl:operation name="doXMPPBasedMultiFactorAuthForInfocard">
-            <soap12:operation soapAction="urn:doXMPPBasedMultiFactorAuthForInfocard" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-            <wsdl:fault name="Exception">
-                <soap12:fault use="literal" name="Exception"/>
-            </wsdl:fault>
-        </wsdl:operation>
         <wsdl:operation name="getOpenIDAssociationResponse">
             <soap12:operation soapAction="urn:getOpenIDAssociationResponse" style="document"/>
             <wsdl:input>
@@ -699,15 +647,6 @@
             </wsdl:input>
             <wsdl:output>
                 <mime:content type="text/xml" part="signInWithInfoCard"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="doXMPPBasedMultiFactorAuthForInfocard">
-            <http:operation location="doXMPPBasedMultiFactorAuthForInfocard"/>
-            <wsdl:input>
-                <mime:content type="text/xml" part="doXMPPBasedMultiFactorAuthForInfocard"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="text/xml" part="doXMPPBasedMultiFactorAuthForInfocard"/>
             </wsdl:output>
         </wsdl:operation>
         <wsdl:operation name="getOpenIDAssociationResponse">

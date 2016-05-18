@@ -134,20 +134,6 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="doXMPPBasedMultiFactorAuthForInfocard">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="doXMPPBasedMultiFactorAuthForInfocardResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
             <xs:element name="getUserProfiles">
                 <xs:complexType>
                     <xs:sequence>
@@ -352,12 +338,6 @@
     <wsdl:message name="getOpenIDAuthResponseResponse">
         <wsdl:part name="parameters" element="ns1:getOpenIDAuthResponseResponse"/>
     </wsdl:message>
-    <wsdl:message name="doXMPPBasedMultiFactorAuthForInfocardRequest">
-        <wsdl:part name="parameters" element="ns1:doXMPPBasedMultiFactorAuthForInfocard"/>
-    </wsdl:message>
-    <wsdl:message name="doXMPPBasedMultiFactorAuthForInfocardResponse">
-        <wsdl:part name="parameters" element="ns1:doXMPPBasedMultiFactorAuthForInfocardResponse"/>
-    </wsdl:message>
     <wsdl:message name="getOpenIDUserRPsRequest">
         <wsdl:part name="parameters" element="ns1:getOpenIDUserRPs"/>
     </wsdl:message>
@@ -445,11 +425,6 @@
             <wsdl:output message="tns:getOpenIDAuthResponseResponse" wsaw:Action="urn:getOpenIDAuthResponseResponse"/>
             <wsdl:fault message="tns:OpenIDProviderServiceIdentityProviderException" name="OpenIDProviderServiceIdentityProviderException" wsaw:Action="urn:getOpenIDAuthResponseOpenIDProviderServiceIdentityProviderException"/>
         </wsdl:operation>
-        <wsdl:operation name="doXMPPBasedMultiFactorAuthForInfocard">
-            <wsdl:input message="tns:doXMPPBasedMultiFactorAuthForInfocardRequest" wsaw:Action="urn:doXMPPBasedMultiFactorAuthForInfocard"/>
-            <wsdl:output message="tns:doXMPPBasedMultiFactorAuthForInfocardResponse" wsaw:Action="urn:doXMPPBasedMultiFactorAuthForInfocardResponse"/>
-            <wsdl:fault message="tns:OpenIDProviderServiceIdentityProviderException" name="OpenIDProviderServiceIdentityProviderException" wsaw:Action="urn:doXMPPBasedMultiFactorAuthForInfocardOpenIDProviderServiceIdentityProviderException"/>
-        </wsdl:operation>
         <wsdl:operation name="getOpenIDUserRPs">
             <wsdl:input message="tns:getOpenIDUserRPsRequest" wsaw:Action="urn:getOpenIDUserRPs"/>
             <wsdl:output message="tns:getOpenIDUserRPsResponse" wsaw:Action="urn:getOpenIDUserRPsResponse"/>
@@ -533,18 +508,6 @@
         </wsdl:operation>
         <wsdl:operation name="getOpenIDAuthResponse">
             <soap:operation soapAction="urn:getOpenIDAuthResponse" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-            <wsdl:fault name="OpenIDProviderServiceIdentityProviderException">
-                <soap:fault use="literal" name="OpenIDProviderServiceIdentityProviderException"/>
-            </wsdl:fault>
-        </wsdl:operation>
-        <wsdl:operation name="doXMPPBasedMultiFactorAuthForInfocard">
-            <soap:operation soapAction="urn:doXMPPBasedMultiFactorAuthForInfocard" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -726,18 +689,6 @@
                 <soap12:fault use="literal" name="OpenIDProviderServiceIdentityProviderException"/>
             </wsdl:fault>
         </wsdl:operation>
-        <wsdl:operation name="doXMPPBasedMultiFactorAuthForInfocard">
-            <soap12:operation soapAction="urn:doXMPPBasedMultiFactorAuthForInfocard" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-            <wsdl:fault name="OpenIDProviderServiceIdentityProviderException">
-                <soap12:fault use="literal" name="OpenIDProviderServiceIdentityProviderException"/>
-            </wsdl:fault>
-        </wsdl:operation>
         <wsdl:operation name="getOpenIDUserRPs">
             <soap12:operation soapAction="urn:getOpenIDUserRPs" style="document"/>
             <wsdl:input>
@@ -896,15 +847,6 @@
         </wsdl:operation>
         <wsdl:operation name="getOpenIDAuthResponse">
             <http:operation location="getOpenIDAuthResponse"/>
-            <wsdl:input>
-                <mime:content type="text/xml" part="parameters"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="text/xml" part="parameters"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="doXMPPBasedMultiFactorAuthForInfocard">
-            <http:operation location="doXMPPBasedMultiFactorAuthForInfocard"/>
             <wsdl:input>
                 <mime:content type="text/xml" part="parameters"/>
             </wsdl:input>

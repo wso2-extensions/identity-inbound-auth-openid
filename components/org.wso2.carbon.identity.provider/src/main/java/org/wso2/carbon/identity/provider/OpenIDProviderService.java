@@ -36,13 +36,10 @@ import org.openid4java.message.ParameterList;
 import org.openid4java.server.ServerException;
 import org.openid4java.server.ServerManager;
 import org.wso2.carbon.identity.base.IdentityConstants;
-import org.wso2.carbon.identity.base.IdentityConstants.ServerConfig;
 import org.wso2.carbon.identity.base.IdentityException;
 import org.wso2.carbon.identity.core.IdentityClaimManager;
 import org.wso2.carbon.identity.core.model.OpenIDRememberMeDO;
 import org.wso2.carbon.identity.core.model.OpenIDUserRPDO;
-import org.wso2.carbon.identity.core.model.XMPPSettingsDO;
-import org.wso2.carbon.identity.core.persistence.IdentityPersistenceManager;
 import org.wso2.carbon.identity.core.util.IdentityCoreConstants;
 import org.wso2.carbon.identity.core.util.IdentityTenantUtil;
 import org.wso2.carbon.identity.core.util.IdentityUtil;
@@ -62,8 +59,6 @@ import org.wso2.carbon.identity.core.dao.OpenIDUserRPDAO;
 import org.wso2.carbon.identity.provider.openid.extensions.OpenIDExtension;
 import org.wso2.carbon.identity.provider.openid.handlers.OpenIDAuthenticationRequest;
 import org.wso2.carbon.identity.provider.openid.handlers.OpenIDExtensionFactory;
-import org.wso2.carbon.identity.provider.xmpp.MPAuthenticationProvider;
-import org.wso2.carbon.registry.core.Registry;
 import org.wso2.carbon.user.core.UserRealm;
 import org.wso2.carbon.user.core.UserStoreException;
 import org.wso2.carbon.user.core.UserStoreManager;
@@ -120,26 +115,16 @@ public class OpenIDProviderService {
         String domainName = MultitenantUtils.getDomainNameFromOpenId(openID);
         String tenantUser = MultitenantUtils.getTenantAwareUsername(userName);
 
-        boolean isAutheticated = false;
-        boolean multiFactAuthnStatus = false;
+        boolean isAuthenticated = false;
         try {
-            isAutheticated = IdentityTenantUtil.getRealm(domainName, userName).getUserStoreManager().authenticate(
+            isAuthenticated = IdentityTenantUtil.getRealm(domainName, userName).getUserStoreManager().authenticate(
                     tenantUser, password);
-            boolean useMultiFactAuthn =
-                    Boolean.parseBoolean(IdentityUtil.getProperty(ServerConfig.OPENID_USE_MULTIFACTOR_AUTHENTICATION));
-            multiFactAuthnStatus = true;
 
-            if (useMultiFactAuthn) {
-                multiFactAuthnStatus = authenticateWithXMPP(tenantUser, tenantUser, tenantUser, isAutheticated);
-                if (log.isDebugEnabled() && multiFactAuthnStatus) {
-                    log.debug("XMPP Multifactor Authentication was completed Successfully.");
-                }
-            }
         } catch (UserStoreException | IdentityException e) {
             throw new IdentityProviderException("Error while authenticating with OpenID " + openID, e);
         }
 
-        if (multiFactAuthnStatus && isAutheticated) {
+        if (isAuthenticated) {
             MessageContext msgContext = MessageContext.getCurrentMessageContext();
             if (msgContext != null) {
                 HttpServletRequest request =
@@ -151,31 +136,7 @@ public class OpenIDProviderService {
             }
         }
 
-        return multiFactAuthnStatus && isAutheticated;
-    }
-
-    /**
-     * Authenticate the user with XMPP
-     *
-     * @param userName
-     * @param tenantUser
-     * @param domainName
-     * @param isAutheticated
-     * @return
-     * @throws IdentityException
-     */
-    private boolean authenticateWithXMPP(String userName, String tenantUser, String domainName,
-                                         boolean isAutheticated) throws IdentityException {
-
-        IdentityPersistenceManager manager = IdentityPersistenceManager.getPersistanceManager();
-        Registry registry = IdentityTenantUtil.getRegistry(domainName, userName);
-        XMPPSettingsDO xmppSettingsDO = manager.getXmppSettings(registry, tenantUser);
-
-        if (xmppSettingsDO != null && xmppSettingsDO.isXmppEnabled() && isAutheticated) {
-            MPAuthenticationProvider mpAuthnProvider = new MPAuthenticationProvider(xmppSettingsDO);
-            return mpAuthnProvider.authenticate();
-        }
-        return true;
+        return isAuthenticated;
     }
 
     /**
@@ -563,39 +524,6 @@ public class OpenIDProviderService {
 
         paramList = new ParameterList(paramMap);
         return paramList;
-    }
-
-    /**
-     * A new method to do XMPP based authentication for a given user
-     *
-     * @param userId
-     * @return
-     * @throws IdentityProviderException
-     */
-    public boolean doXMPPBasedMultiFactorAuthForInfocard(String userId) throws IdentityProviderException {
-
-        boolean authenticationStatus = true;
-        XMPPSettingsDO xmppSettingsDO = null;
-        try {
-            IdentityPersistenceManager persistenceManager = IdentityPersistenceManager.getPersistanceManager();
-            xmppSettingsDO = persistenceManager.getXmppSettings(IdentityTenantUtil.getRegistry(null, userId),
-                                                                MultitenantUtils.getTenantAwareUsername(userId));
-        } catch (IdentityException e) {
-            throw new IdentityProviderException("Error while retriving XMPP settings", e);
-        }
-
-        // attempts to do multi-factor authentication, if the user has enabled
-        // it.
-        if (xmppSettingsDO != null && xmppSettingsDO.isXmppEnabled()) {
-            MPAuthenticationProvider mpAuthenticationProvider = new MPAuthenticationProvider(xmppSettingsDO);
-            authenticationStatus = mpAuthenticationProvider.authenticate();
-        }
-
-        if (log.isInfoEnabled()) {
-            log.info("XMPP Multifactor Authentication was completed Successfully.");
-        }
-
-        return authenticationStatus;
     }
 
     /**

@@ -193,17 +193,6 @@ public class OpenIDAdminClient {
     }
 
     /**
-     * Do multi-factor authentication for an user
-     *
-     * @param userId
-     * @return
-     * @throws Exception
-     */
-    public boolean doxmppBasedMultiFactorAuthForInfoCards(String userId) throws IdentityProviderException {
-        return openIDProviderService.doXMPPBasedMultiFactorAuthForInfocard(userId);
-    }
-
-    /**
      * @param openid
      * @return
      * @throws IdentityProviderException

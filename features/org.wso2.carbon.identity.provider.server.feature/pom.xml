@@ -42,10 +42,6 @@
             <artifactId>openid4java</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.igniterealtime.smack.wso2</groupId>
-            <artifactId>smack</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.wso2.carbon.identity</groupId>
             <artifactId>org.wso2.carbon.identity.application.authentication.endpoint</artifactId>
             <type>war</type>
@@ -122,7 +118,6 @@
                             <bundles>
                                 <bundleDef>org.wso2.carbon.identity:org.wso2.carbon.identity.provider</bundleDef>
                                 <bundleDef>org.wso2.orbit.org.openid4java:openid4java</bundleDef>
-                                <bundleDef>org.igniterealtime.smack.wso2:smack</bundleDef>
                                 <bundleDef>org.wso2.orbit.org.opensaml:opensaml</bundleDef>
                                 <bundleDef>net.sf.ehcache.wso2:ehcache</bundleDef>
                                 <bundleDef>net.minidev:json-smart</bundleDef>
