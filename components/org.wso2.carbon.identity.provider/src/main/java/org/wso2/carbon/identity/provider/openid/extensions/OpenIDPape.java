@@ -152,9 +152,6 @@ public class OpenIDPape extends OpenIDExtension {
         policySet[2].setName(IdentityConstants.OpenId.PapeAttributes.INFOCARD_BASED_MULTIFACTOR_AUTH);
         policySet[2].setValue("false");
 
-        policySet[3].setName(IdentityConstants.OpenId.PapeAttributes.XMPP_BASED_MULTIFACTOR_AUTH);
-        policySet[3].setValue("false");
-
         if (request.isPhishingResistanceLogin()) {
             policySet[0].setValue("true");
         }
