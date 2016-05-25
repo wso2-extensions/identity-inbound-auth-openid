@@ -505,8 +505,6 @@ public class OpenIDHandler {
                                   append(FrameworkConstants.RequestParams.TYPE).
                                   append("=").
                                   append(FrameworkConstants.RequestType.CLAIM_TYPE_OPENID);
-        // reading the authorization header for request path authentication
-        FrameworkUtils.setRequestPathCredentials(request);
 
         return queryStringBuilder.toString();
     }
