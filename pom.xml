@@ -176,6 +176,9 @@
     </dependencyManagement>
 
     <properties>
+        <identity.framework.version>5.1.1-SNAPSHOT</identity.framework.version>
+        <carbon.identity.package.export.version>${project.version}</carbon.identity.package.export.version>
+
         <identity.inbound.auth.openid.version>5.1.1-SNAPSHOT</identity.inbound.auth.openid.version>
 
         <ehcache.version>1.5.0.wso2v3</ehcache.version>

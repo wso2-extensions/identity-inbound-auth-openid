@@ -25,6 +25,7 @@ import org.apache.xml.security.utils.EncryptionConstants;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.wso2.carbon.base.ServerConfiguration;
+import org.wso2.carbon.identity.core.util.IdentityUtil;
 
 import javax.crypto.SecretKey;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -44,8 +45,7 @@ public class TokenDecrypter {
     public static Element decryptToken(String token) throws Exception {
 
         ByteArrayInputStream bais = new ByteArrayInputStream(token.getBytes());
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        dbf.setNamespaceAware(true);
+        DocumentBuilderFactory dbf = IdentityUtil.getSecuredDocumentBuilderFactory();
         Document doc = dbf.newDocumentBuilder().parse(bais);
         Element encryptedTokenElem = doc.getDocumentElement();
 
