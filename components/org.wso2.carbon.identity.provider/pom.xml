@@ -87,6 +87,10 @@
             <artifactId>opensaml</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.wso2.orbit.joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.logging</artifactId>
         </dependency>
@@ -140,7 +144,7 @@
                             net.minidev.json; version="${net.minidev.json.imp.pkg.version.range}",
 
                             org.w3c.dom,
-                            org.joda.time;version="${opensaml2.wso2.osgi.version.range}",
+                            org.joda.time;version="${joda.wso2.osgi.version.range}",
                             org.opensaml.*; version="${opensaml2.wso2.osgi.version.range}",
                             org.openid4java.*; version="${openid4java.wso2.osgi.version.range}",
 
