@@ -58,6 +58,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Handles functionality related OpenID association,
@@ -563,6 +564,8 @@ public class OpenIDHandler {
 
                 if (authnResult != null && authnResult.isAuthenticated()) {
                     userName = authnResult.getSubject().getAuthenticatedSubjectIdentifier();
+                    regenerateSession(req);
+                    session = req.getSession();
                     session.setAttribute(OpenIDConstants.AUTHENTICATION_RESULT, authnResult);
                 }
 
@@ -739,5 +742,32 @@ public class OpenIDHandler {
 
     private String getRelyingParty(HttpServletRequest request) {
         return request.getParameter("openid.realm");
+    }
+
+    /**
+     * Regenerate session after successful authentication
+     *
+     * @param request HttpServelet Request instance
+     */
+    private void regenerateSession(HttpServletRequest request) {
+
+        HttpSession oldSession = request.getSession();
+
+        Enumeration attrNames = oldSession.getAttributeNames();
+        Properties props = new Properties();
+
+        while (attrNames != null && attrNames.hasMoreElements()) {
+            String key = (String) attrNames.nextElement();
+            props.put(key, oldSession.getAttribute(key));
+        }
+
+        oldSession.invalidate();
+        HttpSession newSession = request.getSession(true);
+        attrNames = props.keys();
+
+        while (attrNames != null && attrNames.hasMoreElements()) {
+            String key = (String) attrNames.nextElement();
+            newSession.setAttribute(key, props.get(key));
+        }
     }
 }
