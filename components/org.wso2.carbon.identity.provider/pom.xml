@@ -173,23 +173,23 @@
                             org.wso2.carbon.user.core.*; version="${carbon.kernel.package.import.version.range}",
                             org.wso2.carbon.user.api; version="${carbon.user.api.imp.pkg.version.range}",
 
-                            org.wso2.carbon.identity.base; version="${carbon.identity.package.import.version.range}",
-                            org.wso2.carbon.identity.core.*; version="${carbon.identity.package.import.version.range}",
+                            org.wso2.carbon.identity.base; version="${identity.framework.import.pkg.version}",
+                            org.wso2.carbon.identity.core.*; version="${identity.framework.import.pkg.version}",
                             org.wso2.carbon.identity.application.authentication.framework.*;
-                            version="${carbon.identity.package.import.version.range}",
+                            version="${identity.framework.import.pkg.version}",
                             org.wso2.carbon.identity.application.common.cache;
-                            version="${carbon.identity.package.import.version.range}",
+                            version="${identity.framework.import.pkg.version}",
                             org.wso2.carbon.identity.application.common.model;
-                            version="${carbon.identity.package.import.version.range}",
+                            version="${identity.framework.import.pkg.version}",
                             org.owasp.encoder; version ="${encoder.wso2.imp.pkg.version.range}",
                             org.wso2.carbon.identity.application.mgt.*;
-                            version="${carbon.identity.package.import.version.range}",
+                            version="${identity.framework.import.pkg.version}",
                             org.wso2.carbon.identity.application.common.*;
-                            version="${carbon.identity.package.import.version.range}",
+                            version="${identity.framework.import.pkg.version}",
                         </Import-Package>
                         <Export-Package>
                             !org.wso2.carbon.identity.provider.internal,
-                            org.wso2.carbon.identity.provider.*; version="${carbon.identity.package.export.version}"
+                            org.wso2.carbon.identity.provider.*;version="${identity.inbound.auth.openid.package.export.version}"
                         </Export-Package>
                     </instructions>
                 </configuration>
