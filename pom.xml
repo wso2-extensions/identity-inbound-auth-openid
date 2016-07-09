@@ -355,8 +355,8 @@
         <jdom.wso2.version>1.0.0.wso2v1</jdom.wso2.version>
         <openid4java.wso2.version>1.0.0.wso2v2</openid4java.wso2.version>
         <opensaml2.wso2.version>2.6.4.wso2v3</opensaml2.wso2.version>
-        <rampart.wso2.version>1.6.1.wso2v21-SNAPSHOT</rampart.wso2.version>
-        <wss4j.version>1.5.11.wso2v13</wss4j.version>
+        <rampart.wso2.version>1.6.1.wso2v22-SNAPSHOT</rampart.wso2.version>
+        <wss4j.version>1.5.11.wso2v14</wss4j.version>
         <axis2.wso2.version>1.6.1.wso2v12</axis2.wso2.version>
         <axiom.wso2.version>1.2.11.wso2v10</axiom.wso2.version>
         <encoder.wso2.version>1.2.0.wso2v1</encoder.wso2.version>
