@@ -341,12 +341,12 @@
 </build>
 
     <properties>
-        <identity.framework.version>5.1.1-SNAPSHOT</identity.framework.version>
+        <identity.framework.version>5.2.0</identity.framework.version>
         <identity.inbound.auth.openid.package.export.version>${project.version}</identity.inbound.auth.openid.package.export.version>
 
         <identity.inbound.auth.openid.version>5.1.1-SNAPSHOT</identity.inbound.auth.openid.version>
 
-        <carbon.kernel.version>4.4.6</carbon.kernel.version>
+        <carbon.kernel.version>4.4.7</carbon.kernel.version>
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
         <google.guice.wso2.version>3.0.wso2v1</google.guice.wso2.version>
         <google.step2.wso2.version>1.0.wso2v2</google.step2.wso2.version>
@@ -355,7 +355,7 @@
         <jdom.wso2.version>1.0.0.wso2v1</jdom.wso2.version>
         <openid4java.wso2.version>1.0.0.wso2v2</openid4java.wso2.version>
         <opensaml2.wso2.version>2.6.4.wso2v3</opensaml2.wso2.version>
-        <rampart.wso2.version>1.6.1.wso2v22-SNAPSHOT</rampart.wso2.version>
+        <rampart.wso2.version>1.6.1.wso2v21</rampart.wso2.version>
         <wss4j.version>1.5.11.wso2v14</wss4j.version>
         <axis2.wso2.version>1.6.1.wso2v12</axis2.wso2.version>
         <axiom.wso2.version>1.2.11.wso2v10</axiom.wso2.version>
