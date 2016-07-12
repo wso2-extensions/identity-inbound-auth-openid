@@ -31,6 +31,17 @@
     <name>WSO2 Carbon - Identity Provider Stub</name>
     <url>http://wso2.org</url>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.axis2.wso2</groupId>
+            <artifactId>axis2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.axis2.wso2</groupId>
+            <artifactId>axis2-client</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -92,24 +103,12 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Export-Package>
-                            org.wso2.carbon.identity.provider.stub.*;
-                            version="${carbon.identity.package.export.version}"
+                            org.wso2.carbon.identity.provider.stub.*;version="${identity.inbound.auth.openid.exp.pkg.version}"
                         </Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.axis2.wso2</groupId>
-            <artifactId>axis2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.axis2.wso2</groupId>
-            <artifactId>axis2-client</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>
