@@ -1,7 +1,51 @@
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://provider.identity.carbon.wso2.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://provider.identity.carbon.wso2.org">
+
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:ax2397="http://provider.identity.carbon.wso2.org/xsd" xmlns:ax2398="http://base.identity.carbon.wso2.org/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://provider.identity.carbon.wso2.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://provider.identity.carbon.wso2.org">
     <wsdl:documentation>IdentityProviderAdminService</wsdl:documentation>
     <wsdl:types>
-        <xs:schema xmlns:ns="http://org.apache.axis2/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://org.apache.axis2/xsd">
+        <xs:schema xmlns:ax2400="http://provider.identity.carbon.wso2.org/xsd" xmlns:ns="http://org.apache.axis2/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://org.apache.axis2/xsd">
+            <xs:import namespace="http://provider.identity.carbon.wso2.org/xsd"/>
+            <xs:element name="IdentityProviderAdminServiceIdentityProviderException">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="IdentityProviderException" nillable="true" type="ax2397:IdentityProviderException"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPrimaryOpenID">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPrimaryOpenIDResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllOpenIDs">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllOpenIDsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="removeOpenID">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="openID" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="addOpenID">
                 <xs:complexType>
                     <xs:sequence>
@@ -35,41 +79,23 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="removeOpenID">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="openID" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getAllOpenIDs">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getAllOpenIDsResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getPrimaryOpenID">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getPrimaryOpenIDResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns:ax2399="http://base.identity.carbon.wso2.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://provider.identity.carbon.wso2.org/xsd">
+            <xs:import namespace="http://base.identity.carbon.wso2.org/xsd"/>
+            <xs:complexType name="IdentityProviderException">
+                <xs:complexContent>
+                    <xs:extension base="ax2399:IdentityException">
+                        <xs:sequence/>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://base.identity.carbon.wso2.org/xsd">
+            <xs:complexType name="IdentityException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="errorCode" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
         </xs:schema>
     </wsdl:types>
     <wsdl:message name="addOpenIDRequest">
@@ -93,6 +119,9 @@
     <wsdl:message name="getPrimaryOpenIDResponse">
         <wsdl:part name="parameters" element="ns1:getPrimaryOpenIDResponse"/>
     </wsdl:message>
+    <wsdl:message name="IdentityProviderAdminServiceIdentityProviderException">
+        <wsdl:part name="parameters" element="ns1:IdentityProviderAdminServiceIdentityProviderException"/>
+    </wsdl:message>
     <wsdl:message name="getAllOpenIDsRequest">
         <wsdl:part name="parameters" element="ns1:getAllOpenIDs"/>
     </wsdl:message>
@@ -114,12 +143,12 @@
         <wsdl:operation name="getPrimaryOpenID">
             <wsdl:input message="tns:getPrimaryOpenIDRequest" wsaw:Action="urn:getPrimaryOpenID"/>
             <wsdl:output message="tns:getPrimaryOpenIDResponse" wsaw:Action="urn:getPrimaryOpenIDResponse"/>
-            <wsdl:fault message="tns:IdentityProviderAdminServiceException" name="IdentityProviderAdminServiceException" wsaw:Action="urn:getPrimaryOpenIDIdentityProviderAdminServiceException"/>
+            <wsdl:fault message="tns:IdentityProviderAdminServiceIdentityProviderException" name="IdentityProviderAdminServiceIdentityProviderException" wsaw:Action="urn:getPrimaryOpenIDIdentityProviderAdminServiceIdentityProviderException"/>
         </wsdl:operation>
         <wsdl:operation name="getAllOpenIDs">
             <wsdl:input message="tns:getAllOpenIDsRequest" wsaw:Action="urn:getAllOpenIDs"/>
             <wsdl:output message="tns:getAllOpenIDsResponse" wsaw:Action="urn:getAllOpenIDsResponse"/>
-            <wsdl:fault message="tns:IdentityProviderAdminServiceException" name="IdentityProviderAdminServiceException" wsaw:Action="urn:getAllOpenIDsIdentityProviderAdminServiceException"/>
+            <wsdl:fault message="tns:IdentityProviderAdminServiceIdentityProviderException" name="IdentityProviderAdminServiceIdentityProviderException" wsaw:Action="urn:getAllOpenIDsIdentityProviderAdminServiceIdentityProviderException"/>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="IdentityProviderAdminServiceSoap11Binding" type="tns:IdentityProviderAdminServicePortType">
@@ -156,8 +185,8 @@
             <wsdl:output>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IdentityProviderAdminServiceException">
-                <soap:fault use="literal" name="IdentityProviderAdminServiceException"/>
+            <wsdl:fault name="IdentityProviderAdminServiceIdentityProviderException">
+                <soap:fault use="literal" name="IdentityProviderAdminServiceIdentityProviderException"/>
             </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="getAllOpenIDs">
@@ -168,8 +197,8 @@
             <wsdl:output>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IdentityProviderAdminServiceException">
-                <soap:fault use="literal" name="IdentityProviderAdminServiceException"/>
+            <wsdl:fault name="IdentityProviderAdminServiceIdentityProviderException">
+                <soap:fault use="literal" name="IdentityProviderAdminServiceIdentityProviderException"/>
             </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
@@ -207,8 +236,8 @@
             <wsdl:output>
                 <soap12:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IdentityProviderAdminServiceException">
-                <soap12:fault use="literal" name="IdentityProviderAdminServiceException"/>
+            <wsdl:fault name="IdentityProviderAdminServiceIdentityProviderException">
+                <soap12:fault use="literal" name="IdentityProviderAdminServiceIdentityProviderException"/>
             </wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="getAllOpenIDs">
@@ -219,8 +248,8 @@
             <wsdl:output>
                 <soap12:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IdentityProviderAdminServiceException">
-                <soap12:fault use="literal" name="IdentityProviderAdminServiceException"/>
+            <wsdl:fault name="IdentityProviderAdminServiceIdentityProviderException">
+                <soap12:fault use="literal" name="IdentityProviderAdminServiceIdentityProviderException"/>
             </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
