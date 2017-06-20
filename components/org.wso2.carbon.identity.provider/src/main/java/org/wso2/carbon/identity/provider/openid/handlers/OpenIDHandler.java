@@ -398,10 +398,10 @@ public class OpenIDHandler {
         session.removeAttribute(OpenIDConstants.SessionAttribute.OPENID);
         OpenIDAuthResponseDTO openIDAuthResponse = client.getOpenIDAuthResponse(openIDAuthRequest);
 
-        if (openIDAuthResponse != null) {
-            return openIDAuthResponse.getDestinationUrl() + authenticatedIdPsParam;
-        }
-        return null;
+        /* client.getOpenIDAuthResponse(openIDAuthRequest) never return null value. No need for openIDAuthResponse
+        null checking
+        */
+        return openIDAuthResponse.getDestinationUrl() + authenticatedIdPsParam;
     }
 
     /**
@@ -583,11 +583,6 @@ public class OpenIDHandler {
                     session.setAttribute(OpenIDConstants.SessionAttribute.USERNAME, userName);
                     claimedID = claimedID + userName;
                 }
-
-                // set the username from the session
-                if (userName == null || "".equals(userName.trim())) {
-                    userName = authenticatedUserName;
-                }
             }
 
             // This is important. Created openid in the directed identity case
@@ -704,8 +699,9 @@ public class OpenIDHandler {
                         getParameterValue(OpenId.ATTR_RETURN_TO)) + "'>");
 
         if (userAttributes != null) {
-            for (ClaimMapping claimMapping : userAttributes.keySet()) {
-                String value = userAttributes.get(claimMapping);
+            for (Map.Entry<ClaimMapping, String> entry : userAttributes.entrySet()) {
+                String value = entry.getValue();
+                ClaimMapping claimMapping = entry.getKey();
                 if (value != null) {
                     out.println("<input type='hidden' name='claimTag' value='" +
                             Encode.forHtmlAttribute(claimMapping.getLocalClaim().getClaimUri()) + "'>");

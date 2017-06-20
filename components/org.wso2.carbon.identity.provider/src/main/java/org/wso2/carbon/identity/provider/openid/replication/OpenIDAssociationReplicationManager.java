@@ -19,6 +19,7 @@ package org.wso2.carbon.identity.provider.openid.replication;
 
 import org.apache.axis2.clustering.ClusteringAgent;
 import org.apache.axis2.clustering.ClusteringFault;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openid4java.association.Association;
@@ -49,7 +50,7 @@ public class OpenIDAssociationReplicationManager {
             long cleanupPeriod = 15;
 
             String associationCleanupPeriod = IdentityUtil.getProperty(ServerConfig.OPENID_ASSOCIATION_CLEANUP_PERIOD);
-            if (associationCleanupPeriod != null || !associationCleanupPeriod.trim().isEmpty()) {
+            if (StringUtils.isNotBlank(associationCleanupPeriod)) {
                 try {
                     cleanupPeriod = Long.parseLong(associationCleanupPeriod);
                 } catch (NumberFormatException e) {

@@ -53,7 +53,8 @@ public class OpenIDRememberMeTokenManager {
      * @throws IdentityProviderException
      */
     public String getToken(OpenIDRememberMeDO rememberMe) throws IdentityProviderException {
-        OpenIDRememberMeDO storedDo = null;
+
+        OpenIDRememberMeDO storedDo;
         if ((storedDo = cache.getTokenData(rememberMe)) == null) {
             storedDo = dao.getTokenData(rememberMe);
             cache.updateTokenData(rememberMe);

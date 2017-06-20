@@ -76,14 +76,12 @@ public class OpenIDUtil {
      */
     public static String generateOpenID(String user) throws IdentityProviderException {
 
-        ServerConfiguration serverConfig = null;
         String openIDUserUrl = null;
         String openID = null;
         URI uri = null;
         URL url = null;
         String encodedUser = null;
 
-        serverConfig = ServerConfiguration.getInstance();
         openIDUserUrl = getOpenIDServerURL();
 
         encodedUser = normalizeUrlEncoding(user);
