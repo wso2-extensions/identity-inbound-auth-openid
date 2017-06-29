@@ -24,8 +24,8 @@ import org.openid4java.association.AssociationException;
 import org.openid4java.server.InMemoryServerAssociationStore;
 import org.wso2.carbon.identity.provider.openid.replication.OpenIDAssociationReplicationManager;
 
+import java.security.SecureRandom;
 import java.util.Date;
-import java.util.Random;
 
 public class PrivateAssociationReplicationStore extends InMemoryServerAssociationStore {
 
@@ -37,14 +37,14 @@ public class PrivateAssociationReplicationStore extends InMemoryServerAssociatio
     private static Log log = LogFactory.getLog(PrivateAssociationReplicationStore.class);
 
     public PrivateAssociationReplicationStore(String associationsType) {
-        storeId = new Random().nextInt(9999);
+        storeId = new SecureRandom().nextInt(9999);
         timestamp = Long.toString(new Date().getTime());
         counter = 0;
         associationStoreType = associationsType;
     }
 
     public PrivateAssociationReplicationStore() {
-        storeId = new Random().nextInt(9999);
+        storeId = new SecureRandom().nextInt(9999);
         timestamp = Long.toString(new Date().getTime());
         counter = 0;
     }

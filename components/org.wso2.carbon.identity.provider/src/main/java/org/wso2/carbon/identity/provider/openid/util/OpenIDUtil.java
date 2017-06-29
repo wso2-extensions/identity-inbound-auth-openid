@@ -366,6 +366,7 @@ public class OpenIDUtil {
         cookie.setMaxAge(expires);
         cookie.setPath(path);
         cookie.setSecure(secure);
+        cookie.setHttpOnly(true);
         resp.addCookie(cookie);
     }
 
