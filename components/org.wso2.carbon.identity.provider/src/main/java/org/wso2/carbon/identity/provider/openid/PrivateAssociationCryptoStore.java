@@ -26,6 +26,7 @@ import org.openid4java.server.InMemoryServerAssociationStore;
 import org.wso2.carbon.identity.base.IdentityConstants;
 import org.wso2.carbon.identity.core.util.IdentityUtil;
 
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.Random;
 
@@ -43,7 +44,7 @@ public class PrivateAssociationCryptoStore extends InMemoryServerAssociationStor
     private static Log log = LogFactory.getLog(PrivateAssociationCryptoStore.class);
 
     public PrivateAssociationCryptoStore() {
-        storeId = new Random().nextInt(9999);
+        storeId = new SecureRandom().nextInt(9999);
         counter = 0;
         String serverKey = IdentityUtil.getProperty(IdentityConstants.ServerConfig.OPENID_PRIVATE_ASSOCIATION_SERVER_KEY);
         if(StringUtils.isNotBlank(serverKey)){
