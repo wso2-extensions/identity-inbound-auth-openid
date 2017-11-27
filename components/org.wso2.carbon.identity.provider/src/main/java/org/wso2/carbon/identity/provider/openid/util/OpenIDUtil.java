@@ -213,31 +213,24 @@ public class OpenIDUtil {
     }
 
     public static List<OpenIDParameterDTO> getOpenIDAuthRequestAsList(HttpServletRequest request) {
-        Map<Object, Object> parameterMap = null;
+        Map<String, String[]> parameterMap = null;
         List<OpenIDParameterDTO> params = null;
         OpenIDParameterDTO param = null;
 
         parameterMap = request.getParameterMap();
         params = new ArrayList<OpenIDParameterDTO>();
 
-        for (Map.Entry<Object, Object> keyValEntry : parameterMap.entrySet()) {
-            String name = (String) keyValEntry.getKey();
-            Object v = keyValEntry.getValue();
+        for (Map.Entry<String, String[]> keyValEntry : parameterMap.entrySet()) {
+            String name =  keyValEntry.getKey();
+            String[] values = keyValEntry.getValue();
 
             String value;
-            if (v instanceof String[]) {
-                String[] values = (String[]) v;
-                if (values.length > 1 && name.startsWith("openid.")) {
+            if (values.length > 1 && name.startsWith("openid.")) {
                     //values[0] only need to send through argument since the array values contains repeated elements
                     throw new IllegalArgumentException("Multiple parameters with the same name: " + values[0]);
-                }
-
-                value = values.length > 0 ? values[0] : null;
-            } else if (v instanceof String) {
-                value = (String) v;
-            } else {
-                value = "";
             }
+
+            value = values.length > 0 ? values[0] : null;
 
             param = new OpenIDParameterDTO();
             param.setName(name);
