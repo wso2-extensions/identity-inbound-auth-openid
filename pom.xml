@@ -266,6 +266,11 @@
                 <artifactId>guava</artifactId>
                 <version>${google.guava.wso2.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.wso2.tomcat</groupId>
+                <artifactId>tomcat-servlet-api</artifactId>
+                <version>${tomcat-servlet-api.version}</version>
+            </dependency>
 
             <!-- Identity Inbound Auth Openid dependencies -->
             <dependency>
@@ -427,6 +432,7 @@
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
         <jdom.wso2.version>1.0.0.wso2v1</jdom.wso2.version>
         <json-smart.version>1.3</json-smart.version>
+        <tomcat-servlet-api.version>7.0.81.wso2v1</tomcat-servlet-api.version>
         <net.minidev.json.imp.pkg.version.range>[1.3.0, 2.0.0)</net.minidev.json.imp.pkg.version.range>
 
         <!--Maven Plugin Version-->
