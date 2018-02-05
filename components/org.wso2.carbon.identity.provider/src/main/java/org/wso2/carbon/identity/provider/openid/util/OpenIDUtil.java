@@ -213,12 +213,9 @@ public class OpenIDUtil {
     }
 
     public static List<OpenIDParameterDTO> getOpenIDAuthRequestAsList(HttpServletRequest request) {
-        Map<String, String[]> parameterMap = null;
-        List<OpenIDParameterDTO> params = null;
-        OpenIDParameterDTO param = null;
-
-        parameterMap = request.getParameterMap();
-        params = new ArrayList<OpenIDParameterDTO>();
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        List<OpenIDParameterDTO> params = new ArrayList<>();
+        OpenIDParameterDTO param;
 
         for (Map.Entry<String, String[]> keyValEntry : parameterMap.entrySet()) {
             String name =  keyValEntry.getKey();
