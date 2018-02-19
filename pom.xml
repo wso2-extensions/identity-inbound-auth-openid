@@ -423,7 +423,7 @@
         <joda.wso2.version>2.8.2.wso2v1</joda.wso2.version>
         <joda.wso2.osgi.version.range>[2.8.2,3.0.0)</joda.wso2.osgi.version.range>
 
-        <openid4java.wso2.version>1.0.0.wso2v2</openid4java.wso2.version>
+        <openid4java.wso2.version>1.0.0.wso2v3</openid4java.wso2.version>
         <openid4java.wso2.osgi.version.range>[1.0.0,2.0.0)</openid4java.wso2.osgi.version.range>
 
         <opensaml2.wso2.version>2.6.4.wso2v3</opensaml2.wso2.version>
