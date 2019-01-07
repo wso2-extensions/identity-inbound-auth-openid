@@ -80,6 +80,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
         String[] splitArr = null;
         IdentityAttributeService[] attributeCallbackServices = null;
         String endPointReference = null;
+        String userTenantDomain = null;
 
         if (callback instanceof SAMLAttributeCallback) {
             attrCallback = (SAMLAttributeCallback) callback;
@@ -88,6 +89,8 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
             claimDialect = data.getClaimDialect();
             userIdentifier = data.getPrincipal().getName();
             endPointReference = data.getAppliesToAddress();
+            userTenantDomain = data.getInMessageContext().getProperty("tenant-domain") != null ?
+                    (String)data.getInMessageContext().getProperty("tenant-domain") : "carbon.super";
 
             if (userIdentifier != null) {
                     /*Extract 'Common Name' as the user id if authenticated
@@ -101,7 +104,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
             if (StringUtils.isNotEmpty(claimDialect) && claimElem != null) {
                 try {
                     processClaimData(data, claimElem);
-                    loadClaims(claimElem, userIdentifier);
+                    loadClaims(claimElem, userIdentifier, userTenantDomain);
                     populateClaimValues(userIdentifier, attrCallback);
                 } catch (IdentityProviderException e) {
                     log.error("Error occurred while populating claim data", e);
@@ -191,7 +194,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
      * @param userIdentifier
      * @throws IdentityProviderException
      */
-    private void loadClaims(OMElement claimsElement, String userIdentifier) throws IdentityProviderException {
+    private void loadClaims(OMElement claimsElement, String userIdentifier, String tenantDomain) throws IdentityProviderException {
         IdentityClaimManager claimManager = null;
         Claim[] claims = null;
         String claimDialect = null;
@@ -212,7 +215,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
         try {
             claimManager = IdentityClaimManager.getInstance();
             claims =
-                    claimManager.getAllSupportedClaims(claimDialect, IdentityTenantUtil.getRealm(null, userIdentifier));
+                    claimManager.getAllSupportedClaims(claimDialect, IdentityTenantUtil.getRealm(tenantDomain, null));
             for (int i = 0; i < claims.length; i++) {
                 Claim temp = claims[i];
                 supportedClaims.put(temp.getClaimUri(), temp);
@@ -332,7 +335,8 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
         try {
             if (MapUtils.isEmpty(requestedClaimValues)) {
                 try {
-                    connector = IdentityTenantUtil.getRealm(null, userIdentifier).getUserStoreManager();
+                    connector = IdentityTenantUtil.getRealm(getTenantDomainFromCallback(callback), null).
+                            getUserStoreManager();
                     mapValues = connector.getUserClaimValues(
                             MultitenantUtils.getTenantAwareUsername(userId),
                             claimList.toArray(claimArray), null);
@@ -403,5 +407,15 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
 
     protected RequestedClaimData getRequestedClaim() {
         return new RequestedClaimData();
+    }
+
+    private String getTenantDomainFromCallback(SAMLAttributeCallback callback) {
+        RahasData data = null;
+        String userTenantDomain = null;
+
+        data = callback.getData();
+        userTenantDomain = data.getInMessageContext().getProperty("tenant-domain") != null ?
+                (String) data.getInMessageContext().getProperty("tenant-domain") : "carbon.super";
+        return  userTenantDomain;
     }
 }
