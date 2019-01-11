@@ -37,6 +37,7 @@ import org.opensaml.xml.XMLObjectBuilderFactory;
 import org.opensaml.xml.schema.XSString;
 import org.opensaml.xml.schema.impl.XSStringBuilder;
 import org.wso2.carbon.context.CarbonContext;
+import org.wso2.carbon.identity.application.authentication.framework.model.AuthenticatedUser;
 import org.wso2.carbon.identity.application.common.IdentityApplicationManagementException;
 import org.wso2.carbon.identity.application.common.model.ClaimMapping;
 import org.wso2.carbon.identity.application.common.model.ServiceProvider;
@@ -62,6 +63,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import static org.wso2.carbon.identity.application.authentication.framework.util.FrameworkConstants.AUTHENTICATED_USER;
+import static org.wso2.carbon.utils.multitenancy.MultitenantConstants.SUPER_TENANT_DOMAIN_NAME;
+
 public class AttributeCallbackHandler implements SAMLCallbackHandler {
 
     private static final Log log = LogFactory.getLog(AttributeCallbackHandler.class);
@@ -80,6 +84,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
         String[] splitArr = null;
         IdentityAttributeService[] attributeCallbackServices = null;
         String endPointReference = null;
+        String spTenantDomain = null;
 
         if (callback instanceof SAMLAttributeCallback) {
             attrCallback = (SAMLAttributeCallback) callback;
@@ -88,6 +93,12 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
             claimDialect = data.getClaimDialect();
             userIdentifier = data.getPrincipal().getName();
             endPointReference = data.getAppliesToAddress();
+            spTenantDomain = data.getInMessageContext().getProperty("spTenantDomain") != null ?
+                    (String) data.getInMessageContext().getProperty("spTenantDomain") :
+                    SUPER_TENANT_DOMAIN_NAME;
+            AuthenticatedUser authenticatedUser = (AuthenticatedUser) data.getInMessageContext()
+                    .getProperty(AUTHENTICATED_USER);
+
 
             if (userIdentifier != null) {
                     /*Extract 'Common Name' as the user id if authenticated
@@ -101,7 +112,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
             if (StringUtils.isNotEmpty(claimDialect) && claimElem != null) {
                 try {
                     processClaimData(data, claimElem);
-                    loadClaims(claimElem, userIdentifier);
+                    loadClaims(claimElem, spTenantDomain);
                     populateClaimValues(userIdentifier, attrCallback);
                 } catch (IdentityProviderException e) {
                     log.error("Error occurred while populating claim data", e);
@@ -136,9 +147,16 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
 
                             if (StringUtils.isNotBlank(remoteClaimSuffixValue) &&
                                     StringUtils.isNotBlank(remoteClaimPrefixValue)) {
-                                localClaimValue = IdentityProviderServiceComponent.getRealmService().
-                                        getBootstrapRealm().getUserStoreManager().
-                                        getUserClaimValue(userIdentifier, localClaimUri, "default");
+
+                                if(!authenticatedUser.isFederatedUser()) {
+                                    if (log.isDebugEnabled()) {
+                                        log.debug("Loading claim values from local UserStore for user: "
+                                                + authenticatedUser.toString());
+                                    }
+                                    localClaimValue = IdentityProviderServiceComponent.getRealmService().
+                                            getBootstrapRealm().getUserStoreManager().
+                                            getUserClaimValue(userIdentifier, localClaimUri, "default");
+                                }
 
                                 if (StringUtils.isEmpty(localClaimValue)) {
                                     localClaimValue = new String();
@@ -188,12 +206,12 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
      * This method loads claim according to the claim dialect that is defined in the request
      *
      * @param claimsElement
-     * @param userIdentifier
+     * @param spTenantDomain
      * @throws IdentityProviderException
      */
-    private void loadClaims(OMElement claimsElement, String userIdentifier) throws IdentityProviderException {
-        IdentityClaimManager claimManager = null;
-        Claim[] claims = null;
+    private void loadClaims(OMElement claimsElement, String spTenantDomain) throws IdentityProviderException {
+        IdentityClaimManager claimManager;
+        Claim[] claims;
         String claimDialect = null;
 
         if (claimsElement.getNamespace() != null) {
@@ -212,7 +230,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
         try {
             claimManager = IdentityClaimManager.getInstance();
             claims =
-                    claimManager.getAllSupportedClaims(claimDialect, IdentityTenantUtil.getRealm(null, userIdentifier));
+                    claimManager.getAllSupportedClaims(claimDialect, IdentityTenantUtil.getRealm(spTenantDomain, null));
             for (int i = 0; i < claims.length; i++) {
                 Claim temp = claims[i];
                 supportedClaims.put(temp.getClaimUri(), temp);
@@ -317,6 +335,8 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
         Iterator<RequestedClaimData> ite = requestedClaims.values().iterator();
         List<String> claimList = new ArrayList<String>();
         rahasData = callback.getData();
+        AuthenticatedUser authenticatedUser = (AuthenticatedUser) rahasData.getInMessageContext()
+                .getProperty(AUTHENTICATED_USER);
 
         while (ite.hasNext()) {
             RequestedClaimData claim = ite.next();
@@ -332,10 +352,16 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
         try {
             if (MapUtils.isEmpty(requestedClaimValues)) {
                 try {
-                    connector = IdentityTenantUtil.getRealm(null, userIdentifier).getUserStoreManager();
-                    mapValues = connector.getUserClaimValues(
-                            MultitenantUtils.getTenantAwareUsername(userId),
-                            claimList.toArray(claimArray), null);
+                    if(!authenticatedUser.isFederatedUser()) {
+                        if (log.isDebugEnabled()) {
+                            log.debug("Loading claim values from local UserStore for user: "
+                                    + authenticatedUser.toString());
+                        }
+                        connector = IdentityTenantUtil.getRealm(authenticatedUser.getTenantDomain(), null).
+                                getUserStoreManager();
+                        mapValues = connector.getUserClaimValues(MultitenantUtils.getTenantAwareUsername(userId),
+                                claimList.toArray(claimArray), null);
+                    }
                 } catch (UserStoreException e) {
                     throw new IdentityProviderException("Error while instantiating IdentityUserStore", e);
                 }
@@ -404,4 +430,5 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
     protected RequestedClaimData getRequestedClaim() {
         return new RequestedClaimData();
     }
+
 }
