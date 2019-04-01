@@ -262,9 +262,9 @@
                 <version>${jdom.wso2.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.google.guava.wso2</groupId>
+                <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>${google.guava.wso2.version}</version>
+                <version>${google.guava.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.tomcat</groupId>
@@ -418,7 +418,7 @@
 
         <google.guice.wso2.version>3.0.wso2v1</google.guice.wso2.version>
         <google.step2.wso2.version>1.0.wso2v2</google.step2.wso2.version>
-        <google.guava.wso2.version>12.0.0.wso2v1</google.guava.wso2.version>
+        <google.guava.version>27.0-jre</google.guava.version>
 
         <joda.wso2.version>2.9.4.wso2v1</joda.wso2.version>
         <joda.wso2.osgi.version.range>[2.8.2,3.0.0)</joda.wso2.osgi.version.range>
