@@ -431,9 +431,9 @@
 
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
         <jdom.wso2.version>1.0.0.wso2v1</jdom.wso2.version>
-        <json-smart.version>1.3</json-smart.version>
+        <json-smart.version>2.3</json-smart.version>
         <tomcat-servlet-api.version>7.0.81.wso2v1</tomcat-servlet-api.version>
-        <net.minidev.json.imp.pkg.version.range>[1.3.0, 2.0.0)</net.minidev.json.imp.pkg.version.range>
+        <net.minidev.json.imp.pkg.version.range>[2.3.0, 3.0.0)</net.minidev.json.imp.pkg.version.range>
 
         <!--Maven Plugin Version-->
         <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
