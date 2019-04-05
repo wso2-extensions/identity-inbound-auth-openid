@@ -278,6 +278,16 @@
                 <artifactId>org.wso2.carbon.identity.provider</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>net.minidev</groupId>
+                <artifactId>accessors-smart</artifactId>
+                <version>${net.minidev.accessors-smart.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>${org.ow2.asm.asm.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -434,6 +444,8 @@
         <json-smart.version>2.3</json-smart.version>
         <tomcat-servlet-api.version>7.0.81.wso2v1</tomcat-servlet-api.version>
         <net.minidev.json.imp.pkg.version.range>[2.3.0, 3.0.0)</net.minidev.json.imp.pkg.version.range>
+        <net.minidev.accessors-smart.version>1.2</net.minidev.accessors-smart.version>
+        <org.ow2.asm.asm.version>5.2</org.ow2.asm.asm.version>
 
         <!--Maven Plugin Version-->
         <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
