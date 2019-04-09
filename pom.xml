@@ -285,7 +285,7 @@
             </dependency>
             <dependency>
                 <groupId>org.ow2.asm</groupId>
-                <artifactId>asm</artifactId>
+                <artifactId>asm-all</artifactId>
                 <version>${org.ow2.asm.asm.version}</version>
             </dependency>
 
