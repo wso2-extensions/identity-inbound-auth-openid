@@ -22,6 +22,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
 import org.wso2.carbon.identity.core.util.IdentityCoreInitializedEvent;
 import org.wso2.carbon.identity.provider.IdentityAttributeService;
@@ -32,17 +38,12 @@ import org.wso2.carbon.user.core.UserRealm;
 import org.wso2.carbon.user.core.listener.UserOperationEventListener;
 import org.wso2.carbon.user.core.service.RealmService;
 import org.wso2.carbon.utils.ConfigurationContextService;
+
 import javax.servlet.ServletContext;
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ReferenceCardinality;
-import org.osgi.service.component.annotations.ReferencePolicy;
 
 @Component(
-         name = "identity.provider.component", 
-         immediate = true)
+        name = "identity.provider.component",
+        immediate = true)
 public class IdentityProviderServiceComponent {
 
     private static final Log log = LogFactory.getLog(IdentityProviderServiceComponent.class);
@@ -60,9 +61,11 @@ public class IdentityProviderServiceComponent {
     /**
      */
     public IdentityProviderServiceComponent() {
+
     }
 
     public static RealmService getRealmService() {
+
         return realmService;
     }
 
@@ -70,12 +73,13 @@ public class IdentityProviderServiceComponent {
      * @param realmService
      */
     @Reference(
-             name = "user.realmservice.default", 
-             service = org.wso2.carbon.user.core.service.RealmService.class, 
-             cardinality = ReferenceCardinality.MANDATORY, 
-             policy = ReferencePolicy.DYNAMIC, 
-             unbind = "unsetRealmService")
+            name = "user.realmservice.default",
+            service = org.wso2.carbon.user.core.service.RealmService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetRealmService")
     protected void setRealmService(RealmService realmService) {
+
         if (log.isDebugEnabled()) {
             log.info("ReleamService is set in Identity Provider Service Bundle");
         }
@@ -86,14 +90,17 @@ public class IdentityProviderServiceComponent {
      * @return
      */
     public static ConfigurationContext getConfigContext() {
+
         return configContext;
     }
 
     public static RegistryService getRegistryService() {
+
         return registryService;
     }
 
     public static ApplicationManagementService getApplicationManagementService() {
+
         return applicationManagementService;
     }
 
@@ -101,12 +108,13 @@ public class IdentityProviderServiceComponent {
      * @param registryService
      */
     @Reference(
-             name = "registry.service", 
-             service = org.wso2.carbon.registry.core.service.RegistryService.class, 
-             cardinality = ReferenceCardinality.MANDATORY, 
-             policy = ReferencePolicy.DYNAMIC, 
-             unbind = "unsetRegistryService")
+            name = "registry.service",
+            service = org.wso2.carbon.registry.core.service.RegistryService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetRegistryService")
     protected void setRegistryService(RegistryService registryService) {
+
         this.registryService = registryService;
         if (log.isDebugEnabled()) {
             log.debug("RegistryService set in Identity Provider bundle");
@@ -118,13 +126,15 @@ public class IdentityProviderServiceComponent {
      */
     @Activate
     protected void activate(ComponentContext ctxt) {
+
         if (log.isDebugEnabled()) {
             log.debug("Identity Provider bundle is activated");
         }
         try {
             // register User Operation Event Listener for openID
             IdentityOpenIDUserEventListener openIDUserListener = new IdentityOpenIDUserEventListener();
-            userEventServiceRegistration = ctxt.getBundleContext().registerService(UserOperationEventListener.class.getName(), openIDUserListener, null);
+            userEventServiceRegistration = ctxt.getBundleContext().registerService(UserOperationEventListener.class
+                    .getName(), openIDUserListener, null);
             String filter = "(objectclass=" + ServletContext.class.getName() + ")";
             ctxt.getBundleContext().addServiceListener(new ServletContextListener(ctxt.getBundleContext()), filter);
         } catch (Throwable e) {
@@ -137,6 +147,7 @@ public class IdentityProviderServiceComponent {
      */
     @Deactivate
     protected void deactivate(ComponentContext ctxt) {
+
         if (userEventServiceRegistration != null) {
             userEventServiceRegistration.unregister();
         }
@@ -149,6 +160,7 @@ public class IdentityProviderServiceComponent {
      * @param registryService
      */
     protected void unsetRegistryService(RegistryService registryService) {
+
         this.registryService = null;
         if (log.isDebugEnabled()) {
             log.debug("RegistryService unset in Identity Provider bundle");
@@ -156,12 +168,13 @@ public class IdentityProviderServiceComponent {
     }
 
     @Reference(
-             name = "identity.application.management.component", 
-             service = org.wso2.carbon.identity.application.mgt.ApplicationManagementService.class, 
-             cardinality = ReferenceCardinality.MANDATORY, 
-             policy = ReferencePolicy.DYNAMIC, 
-             unbind = "unsetApplicationMgtService")
+            name = "identity.application.management.component",
+            service = org.wso2.carbon.identity.application.mgt.ApplicationManagementService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetApplicationMgtService")
     protected void setApplicationMgtService(ApplicationManagementService applicationMgtService) {
+
         if (log.isDebugEnabled()) {
             log.debug((Object) "ApplicationManagementService set in Identity Provider bundle");
         }
@@ -169,6 +182,7 @@ public class IdentityProviderServiceComponent {
     }
 
     protected void unsetApplicationMgtService(ApplicationManagementService applicationMgtService) {
+
         if (log.isDebugEnabled()) {
             log.debug((Object) "ApplicationManagementService unset in Identity Provider bundle");
         }
@@ -179,6 +193,7 @@ public class IdentityProviderServiceComponent {
      * @param userRealmDelegating
      */
     protected void unsetUserRealmDelegating(UserRealm userRealmDelegating) {
+
         if (log.isDebugEnabled()) {
             log.debug("DelegatingUserRealm set in Identity Provider bundle");
         }
@@ -188,6 +203,7 @@ public class IdentityProviderServiceComponent {
      * @param userRealmDefault
      */
     protected void unsetUserRealmDefault(UserRealm userRealmDefault) {
+
         if (log.isDebugEnabled()) {
             log.debug("DefaultUserRealm unset in Identity Provider bundle");
         }
@@ -197,18 +213,20 @@ public class IdentityProviderServiceComponent {
      * @param realmService
      */
     protected void unsetRealmService(RealmService realmService) {
+
         if (log.isDebugEnabled()) {
             log.debug("ReleamService is unset in Identity Provider Service Bundle");
         }
     }
 
     @Reference(
-             name = "identity.attribute.service", 
-             service = org.wso2.carbon.identity.provider.IdentityAttributeService.class, 
-             cardinality = ReferenceCardinality.MULTIPLE, 
-             policy = ReferencePolicy.DYNAMIC, 
-             unbind = "removeAttributeService")
+            name = "identity.attribute.service",
+            service = org.wso2.carbon.identity.provider.IdentityAttributeService.class,
+            cardinality = ReferenceCardinality.MULTIPLE,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "removeAttributeService")
     protected void addAttributeService(IdentityAttributeService attributeService) {
+
         if (log.isDebugEnabled()) {
             log.debug("IdentityAttributeService added in Identity Provider bundle");
         }
@@ -219,6 +237,7 @@ public class IdentityProviderServiceComponent {
      * @param attributeService
      */
     protected void removeAttributeService(IdentityAttributeService attributeService) {
+
         if (log.isDebugEnabled()) {
             log.debug("IdentityAttributeService removed in Identity Provider bundle");
             IdentityAttributeServiceStore.removeAttributeService(attributeService);
@@ -229,12 +248,13 @@ public class IdentityProviderServiceComponent {
      * @param contextService
      */
     @Reference(
-             name = "config.context.service", 
-             service = org.wso2.carbon.utils.ConfigurationContextService.class, 
-             cardinality = ReferenceCardinality.MANDATORY, 
-             policy = ReferencePolicy.DYNAMIC, 
-             unbind = "unsetConfigurationContextService")
+            name = "config.context.service",
+            service = org.wso2.carbon.utils.ConfigurationContextService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetConfigurationContextService")
     protected void setConfigurationContextService(ConfigurationContextService contextService) {
+
         if (log.isDebugEnabled()) {
             log.debug("ConfigurationContextService set in Identity Provider bundle");
         }
@@ -245,6 +265,7 @@ public class IdentityProviderServiceComponent {
      * @param contextService
      */
     protected void unsetConfigurationContextService(ConfigurationContextService contextService) {
+
         if (log.isDebugEnabled()) {
             log.debug("ConfigurationContextService unset in Identity Provider bundle");
         }
@@ -256,14 +277,13 @@ public class IdentityProviderServiceComponent {
     }
 
     @Reference(
-             name = "identityCoreInitializedEventService", 
-             service = org.wso2.carbon.identity.core.util.IdentityCoreInitializedEvent.class, 
-             cardinality = ReferenceCardinality.MANDATORY, 
-             policy = ReferencePolicy.DYNAMIC, 
-             unbind = "unsetIdentityCoreInitializedEventService")
+            name = "identityCoreInitializedEventService",
+            service = org.wso2.carbon.identity.core.util.IdentityCoreInitializedEvent.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetIdentityCoreInitializedEventService")
     protected void setIdentityCoreInitializedEventService(IdentityCoreInitializedEvent identityCoreInitializedEvent) {
     /* reference IdentityCoreInitializedEvent service to guarantee that this component will wait until identity core
          is started */
     }
 }
-

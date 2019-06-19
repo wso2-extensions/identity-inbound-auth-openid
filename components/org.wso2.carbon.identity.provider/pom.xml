@@ -119,7 +119,7 @@
             <groupId>org.wso2.tomcat</groupId>
             <artifactId>tomcat-servlet-api</artifactId>
         </dependency>
-    <dependency>
+        <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
             <scope>provided</scope>

@@ -320,7 +320,7 @@
                         <doUpdate>false</doUpdate>
                     </configuration>
                 </plugin>
-            <plugin>
+                <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-scr-plugin</artifactId>
                     <version>${maven.scr.plugin.version}</version>
@@ -396,15 +396,15 @@
         <javax.xml.parsers.import.pkg.version>[0.0.0, 1.0.0)</javax.xml.parsers.import.pkg.version>
 
         <!-- Axis2 Version -->
-        <axis2.wso2.version>1.6.1.wso2v37</axis2.wso2.version>
-        <axis2.osgi.version.range>[1.6.1.wso2v37, 2.0.0)</axis2.osgi.version.range>
+        <axis2.wso2.version>1.6.1-wso2v37</axis2.wso2.version>
+        <axis2.osgi.version.range>[1.6.1-wso2v37, 2.0.0)</axis2.osgi.version.range>
 
         <!-- Axiom Version -->
-        <axiom.wso2.version>1.2.11.wso2v16</axiom.wso2.version>
+        <axiom.wso2.version>1.2.11-wso2v16</axiom.wso2.version>
         <axiom.osgi.version.range>[1.2.11, 2.0.0)</axiom.osgi.version.range>
 
         <!-- Rampart version -->
-        <rampart.wso2.version>1.6.1.wso2v36</rampart.wso2.version>
+        <rampart.wso2.version>1.6.1-wso2v36</rampart.wso2.version>
         <rampart.wso2.osgi.version.range>[1.6.1,2.0.0)</rampart.wso2.osgi.version.range>
 
         <!-- WSS4j version -->
@@ -447,7 +447,7 @@
         <maven.scr.plugin.version>1.26.0</maven.scr.plugin.version>
         <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
         <maven.buildnumber.plugin.version>1.4</maven.buildnumber.plugin.version>
-    <apache.felix.scr.ds.annotations.version>1.2.4</apache.felix.scr.ds.annotations.version>
+        <apache.felix.scr.ds.annotations.version>1.2.4</apache.felix.scr.ds.annotations.version>
     </properties>
 
 </project>
