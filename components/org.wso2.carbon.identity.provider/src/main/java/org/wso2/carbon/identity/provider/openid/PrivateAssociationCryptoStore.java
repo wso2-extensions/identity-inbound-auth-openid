@@ -41,7 +41,7 @@ public class PrivateAssociationCryptoStore extends InMemoryServerAssociationStor
 
     private String serverKey = "jscascasjcwt3276432yvdqwd";
 
-    private static Log log = LogFactory.getLog(PrivateAssociationCryptoStore.class);
+    private static final Log log = LogFactory.getLog(PrivateAssociationCryptoStore.class);
 
     public PrivateAssociationCryptoStore() {
         storeId = new SecureRandom().nextInt(9999);

@@ -34,7 +34,7 @@ public class PrivateAssociationReplicationStore extends InMemoryServerAssociatio
     private int counter;
     private String associationStoreType;
 
-    private static Log log = LogFactory.getLog(PrivateAssociationReplicationStore.class);
+    private static final Log log = LogFactory.getLog(PrivateAssociationReplicationStore.class);
 
     public PrivateAssociationReplicationStore(String associationsType) {
         storeId = new SecureRandom().nextInt(9999);

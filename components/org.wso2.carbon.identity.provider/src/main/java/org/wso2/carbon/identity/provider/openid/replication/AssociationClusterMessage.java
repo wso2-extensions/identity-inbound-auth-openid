@@ -30,7 +30,7 @@ public class AssociationClusterMessage extends ClusteringMessage implements Seri
 
     private static final long serialVersionUID = 3421028095886637679L;
 
-    private static Log log = org.apache.commons.logging.LogFactory.getLog(AssociationClusterMessage.class);
+    private static final Log log = org.apache.commons.logging.LogFactory.getLog(AssociationClusterMessage.class);
 
     private Association association;
     private boolean isRemove;

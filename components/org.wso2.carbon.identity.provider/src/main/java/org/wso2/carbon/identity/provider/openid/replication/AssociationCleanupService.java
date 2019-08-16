@@ -35,7 +35,7 @@ public class AssociationCleanupService {
 
     private static final int NUM_THREADS = 1;
 
-    private static Log log = LogFactory.getLog(AssociationCleanupService.class);
+    private static final Log log = LogFactory.getLog(AssociationCleanupService.class);
 
     public AssociationCleanupService(long initialDelay, long delayBetweenRuns) {
         this.initialDelay = initialDelay;
@@ -50,7 +50,7 @@ public class AssociationCleanupService {
 
     private static final class AssociationCleanupTask implements Runnable{
 
-        private static Log log = LogFactory.getLog(AssociationCleanupTask.class);
+        private static final Log log = LogFactory.getLog(AssociationCleanupTask.class);
 
         @Override
         public void run() {

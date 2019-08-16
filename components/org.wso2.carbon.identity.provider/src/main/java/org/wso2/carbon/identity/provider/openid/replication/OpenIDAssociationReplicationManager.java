@@ -36,7 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class OpenIDAssociationReplicationManager {
 
-    private static Log log = LogFactory.getLog(OpenIDAssociationReplicationManager.class);
+    private static final Log log = LogFactory.getLog(OpenIDAssociationReplicationManager.class);
     private static OpenIDAssociationReplicationManager associationReplicationManager = new OpenIDAssociationReplicationManager();
     private Map<String, Association> associationMap = new ConcurrentHashMap<String, Association>();
 
