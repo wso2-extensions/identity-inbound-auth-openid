@@ -403,7 +403,7 @@
         <carbon.kernel.registry.imp.pkg.version.range>[1.0.1, 2.0.0)</carbon.kernel.registry.imp.pkg.version.range>
 
         <!-- Carbon Identity Framework version -->
-        <carbon.identity.framework.version>5.15.56-SNAPSHOT</carbon.identity.framework.version>
+        <carbon.identity.framework.version>5.15.62</carbon.identity.framework.version>
         <carbon.identity.framework.imp.pkg.version.range>[5.15.0, 6.0.0)</carbon.identity.framework.imp.pkg.version.range>
 
         <!--Carbon component version-->
@@ -423,11 +423,11 @@
         <axiom.osgi.version.range>[1.2.11, 2.0.0)</axiom.osgi.version.range>
 
         <!-- Rampart version -->
-        <rampart.wso2.version>1.6.1-wso2v42-SNAPSHOT</rampart.wso2.version>
+        <rampart.wso2.version>1.6.1-wso2v42</rampart.wso2.version>
         <rampart.wso2.osgi.version.range>[1.6.1,2.0.0)</rampart.wso2.osgi.version.range>
 
         <!-- WSS4j version -->
-        <wss4j.version>1.5.11-wso2v18-SNAPSHOT</wss4j.version>
+        <wss4j.version>1.5.11-wso2v19</wss4j.version>
         <wss4j.ws.security.imp.pkg.version.range>[1.5.11,2.0.0)</wss4j.ws.security.imp.pkg.version.range>
         <wss4j.xml.security.imp.pkg.version.range>[1.4.2.patched,2.0.0)</wss4j.xml.security.imp.pkg.version.range>
 
