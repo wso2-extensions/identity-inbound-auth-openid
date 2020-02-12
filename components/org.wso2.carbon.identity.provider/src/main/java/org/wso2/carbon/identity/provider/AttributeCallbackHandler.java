@@ -352,7 +352,12 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
         try {
             if (MapUtils.isEmpty(requestedClaimValues)) {
                 try {
-                    if(!authenticatedUser.isFederatedUser()) {
+                    if (authenticatedUser == null) {
+                        connector = IdentityTenantUtil.getRealm(null, userId).
+                                getUserStoreManager();
+                        mapValues = connector.getUserClaimValues(MultitenantUtils.getTenantAwareUsername(userId),
+                                claimList.toArray(claimArray), null);
+                    } else if (!authenticatedUser.isFederatedUser()) {
                         if (log.isDebugEnabled()) {
                             log.debug("Loading claim values from local UserStore for user: "
                                     + authenticatedUser.toString());
