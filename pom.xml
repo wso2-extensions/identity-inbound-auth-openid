@@ -197,16 +197,11 @@
             </dependency>
 
             <!-- WSS4J / Rampart dependencies -->
-            <dependency>
-                <groupId>org.apache.ws.security.wso2</groupId>
-                <artifactId>wss4j</artifactId>
-                <version>${wss4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.rampart.wso2</groupId>
-                <artifactId>rampart-trust</artifactId>
-                <version>${rampart.wso2.version}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.apache.ws.security.wso2</groupId>-->
+                <!--<artifactId>wss4j</artifactId>-->
+                <!--<version>${wss4j.version}</version>-->
+            <!--</dependency>-->
 
             <!-- Orbit dependencies -->
             <dependency>
@@ -218,11 +213,6 @@
                 <groupId>org.wso2.orbit.org.openid4java</groupId>
                 <artifactId>openid4java</artifactId>
                 <version>${openid4java.wso2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.orbit.org.opensaml</groupId>
-                <artifactId>opensaml</artifactId>
-                <version>${opensaml2.wso2.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.orbit.joda-time</groupId>
@@ -422,14 +412,10 @@
         <axiom.wso2.version>1.2.11-wso2v16</axiom.wso2.version>
         <axiom.osgi.version.range>[1.2.11, 2.0.0)</axiom.osgi.version.range>
 
-        <!-- Rampart version -->
-        <rampart.wso2.version>1.6.1-wso2v43</rampart.wso2.version>
-        <rampart.wso2.osgi.version.range>[1.6.1,2.0.0)</rampart.wso2.osgi.version.range>
-
         <!-- WSS4j version -->
-        <wss4j.version>1.5.11-wso2v20</wss4j.version>
-        <wss4j.ws.security.imp.pkg.version.range>[1.5.11,2.0.0)</wss4j.ws.security.imp.pkg.version.range>
-        <wss4j.xml.security.imp.pkg.version.range>[1.4.2.patched,2.0.0)</wss4j.xml.security.imp.pkg.version.range>
+        <!--<wss4j.version>1.5.11-wso2v20</wss4j.version>-->
+        <!--<wss4j.ws.security.imp.pkg.version.range>[1.5.11,2.0.0)</wss4j.ws.security.imp.pkg.version.range>-->
+        <!--<wss4j.xml.security.imp.pkg.version.range>[1.4.2.patched,2.0.0)</wss4j.xml.security.imp.pkg.version.range>-->
 
         <!-- Commons -->
         <commons-logging.osgi.version.range>[1.2.0, 2.0.0)</commons-logging.osgi.version.range>
@@ -450,9 +436,6 @@
 
         <openid4java.wso2.version>1.0.0.wso2v4</openid4java.wso2.version>
         <openid4java.wso2.osgi.version.range>[1.0.0,2.0.0)</openid4java.wso2.osgi.version.range>
-
-        <opensaml2.wso2.version>2.6.6.wso2v3</opensaml2.wso2.version>
-        <opensaml2.wso2.osgi.version.range>[2.6.0,3.0.0)</opensaml2.wso2.osgi.version.range>
 
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
         <jdom.wso2.version>1.0.0.wso2v1</jdom.wso2.version>
