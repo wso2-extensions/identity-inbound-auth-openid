@@ -196,13 +196,6 @@
                 <version>${axiom.wso2.version}</version>
             </dependency>
 
-            <!-- WSS4J / Rampart dependencies -->
-            <!--<dependency>-->
-                <!--<groupId>org.apache.ws.security.wso2</groupId>-->
-                <!--<artifactId>wss4j</artifactId>-->
-                <!--<version>${wss4j.version}</version>-->
-            <!--</dependency>-->
-
             <!-- Orbit dependencies -->
             <dependency>
                 <groupId>org.wso2.orbit.org.owasp.encoder</groupId>
@@ -411,11 +404,6 @@
         <!-- Axiom Version -->
         <axiom.wso2.version>1.2.11-wso2v16</axiom.wso2.version>
         <axiom.osgi.version.range>[1.2.11, 2.0.0)</axiom.osgi.version.range>
-
-        <!-- WSS4j version -->
-        <!--<wss4j.version>1.5.11-wso2v20</wss4j.version>-->
-        <!--<wss4j.ws.security.imp.pkg.version.range>[1.5.11,2.0.0)</wss4j.ws.security.imp.pkg.version.range>-->
-        <!--<wss4j.xml.security.imp.pkg.version.range>[1.4.2.patched,2.0.0)</wss4j.xml.security.imp.pkg.version.range>-->
 
         <!-- Commons -->
         <commons-logging.osgi.version.range>[1.2.0, 2.0.0)</commons-logging.osgi.version.range>
