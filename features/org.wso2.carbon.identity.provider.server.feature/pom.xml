@@ -42,11 +42,6 @@
             <artifactId>openid4java</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon.identity.framework</groupId>
-            <artifactId>org.wso2.carbon.identity.application.authentication.endpoint</artifactId>
-            <type>war</type>
-        </dependency>
-        <dependency>
             <groupId>com.google.guice.wso2</groupId>
             <artifactId>guice</artifactId>
         </dependency>
