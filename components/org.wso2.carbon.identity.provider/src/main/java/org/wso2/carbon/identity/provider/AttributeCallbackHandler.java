@@ -404,7 +404,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
                         } else {
                             nameSpace = claimData.getUri();
                             if (nameSpace.contains("/") && nameSpace.length() > (nameSpace.lastIndexOf("/") + 1)) {
-                                // Custom claim uri should be in a format of http(s)://nameSpace/name
+                                // Custom claim uri should be in a format of http(s)://nameSpace/name.
                                 name = nameSpace.substring(nameSpace.lastIndexOf("/") + 1);
                                 nameSpace = nameSpace.substring(0, nameSpace.lastIndexOf("/"));
                             } else {
