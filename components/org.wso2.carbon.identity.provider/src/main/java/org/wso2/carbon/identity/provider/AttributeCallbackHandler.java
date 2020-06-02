@@ -64,6 +64,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import static org.wso2.carbon.identity.application.authentication.framework.util.FrameworkConstants.AUTHENTICATED_USER;
+import static org.wso2.carbon.user.core.UserCoreConstants.DEFAULT_PROFILE;
 import static org.wso2.carbon.utils.multitenancy.MultitenantConstants.SUPER_TENANT_DOMAIN_NAME;
 
 public class AttributeCallbackHandler implements SAMLCallbackHandler {
@@ -151,7 +152,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
                                 if (isHandlerCalledFromWSTrustSTSFlow(attrCallback)) {
                                     localClaimValue = IdentityProviderServiceComponent.getRealmService().
                                             getBootstrapRealm().getUserStoreManager().
-                                            getUserClaimValue(userIdentifier, localClaimUri, "default");
+                                            getUserClaimValue(userIdentifier, localClaimUri, DEFAULT_PROFILE);
                                 } else if(!authenticatedUser.isFederatedUser()) {
                                     if (log.isDebugEnabled()) {
                                         log.debug("Loading claim values from local UserStore for user: "
@@ -159,7 +160,7 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
                                     }
                                     localClaimValue = IdentityProviderServiceComponent.getRealmService().
                                             getBootstrapRealm().getUserStoreManager().
-                                            getUserClaimValue(userIdentifier, localClaimUri, "default");
+                                            getUserClaimValue(userIdentifier, localClaimUri, DEFAULT_PROFILE);
                                 }
 
                                 if (StringUtils.isEmpty(localClaimValue)) {
@@ -439,11 +440,13 @@ public class AttributeCallbackHandler implements SAMLCallbackHandler {
     protected RequestedClaimData getRequestedClaim() {
         return new RequestedClaimData();
     }
-    
+
     private boolean isHandlerCalledFromWSTrustSTSFlow(SAMLAttributeCallback attributeCallback) {
         
-        // Authenticated user property is properly set during a passive STS flow. It is not done in the WS Trust based
-        // flow.
+        /*
+        Authenticated user property is properly set during a passive STS flow. It is not done in the WS Trust based
+        flow.
+         */
         return !(attributeCallback.getData().getInMessageContext().getProperty(AUTHENTICATED_USER) instanceof
                 AuthenticatedUser);
     }
