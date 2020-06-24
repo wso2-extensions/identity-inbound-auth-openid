@@ -22,7 +22,7 @@
         <groupId>org.wso2.carbon.identity.inbound.auth.openid</groupId>
         <artifactId>identity-inbound-auth-openid</artifactId>
         <relativePath>../../pom.xml</relativePath>
-        <version>5.5.2-SNAPSHOT</version>
+        <version>5.6.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -33,10 +33,6 @@
     <url>http://www.wso2.com</url>
 
     <dependencies>
-        <dependency>
-            <groupId>org.apache.ws.security.wso2</groupId>
-            <artifactId>wss4j</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.apache.axis2.wso2</groupId>
             <artifactId>axis2</artifactId>
@@ -52,15 +48,11 @@
         <dependency>
             <groupId>org.wso2.carbon.identity.framework</groupId>
             <artifactId>org.wso2.carbon.security.mgt</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.rampart.wso2</groupId>
-            <artifactId>rampart-trust</artifactId>
             <exclusions>
-            	<exclusion>
-            		<artifactId>servlet-api</artifactId>
-            		<groupId>javax.servlet</groupId>
-            	</exclusion>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -86,10 +78,6 @@
         <dependency>
             <groupId>org.wso2.orbit.org.openid4java</groupId>
             <artifactId>openid4java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.wso2.orbit.org.opensaml</groupId>
-            <artifactId>opensaml</artifactId>
         </dependency>
         <dependency>
             <groupId>org.wso2.orbit.joda-time</groupId>
@@ -146,7 +134,6 @@
                             javax.crypto.spec,
                             javax.xml.namespace,
                             javax.xml.parsers; version="${javax.xml.parsers.import.pkg.version}",
-                            javax.xml.transform.*; version = 0.0.0,
                             javax.xml.stream; version="${equinox.osgi.stax-api.imp.pkg.version.range}",
                             javax.servlet; version="${imp.pkg.version.javax.servlet}",
                             javax.servlet.http; version="${imp.pkg.version.javax.servlet}",
@@ -155,15 +142,10 @@
 
                             org.w3c.dom,
                             org.joda.time;version="${joda.wso2.osgi.version.range}",
-                            org.opensaml.*; version="${opensaml2.wso2.osgi.version.range}",
                             org.openid4java.*; version="${openid4java.wso2.osgi.version.range}",
 
-                            org.apache.rahas.*; version="${rampart.wso2.osgi.version.range}",
                             org.apache.axiom.*; version="${axiom.osgi.version.range}",
                             org.apache.axis2.*; version="${axis2.osgi.version.range}",
-
-                            org.apache.ws.security.*; version="${wss4j.ws.security.imp.pkg.version.range}",
-                            org.apache.xml.security.*; version="${wss4j.xml.security.imp.pkg.version.range}",
 
                             org.apache.commons.codec.binary; version="${commons-codec.wso2.osgi.version.range}",
                             org.apache.commons.logging; version="${commons-logging.osgi.version.range}",
@@ -191,7 +173,6 @@
                             org.wso2.carbon.identity.application.common.cache;version="${carbon.identity.framework.imp.pkg.version.range}",
                             org.wso2.carbon.identity.application.common.model;version="${carbon.identity.framework.imp.pkg.version.range}",
                             org.wso2.carbon.identity.application.mgt.*;version="${carbon.identity.framework.imp.pkg.version.range}",
-                            org.wso2.carbon.identity.application.common.*;version="${carbon.identity.framework.imp.pkg.version.range}",
 
                             org.owasp.encoder; version ="${encoder.wso2.imp.pkg.version.range}",
 

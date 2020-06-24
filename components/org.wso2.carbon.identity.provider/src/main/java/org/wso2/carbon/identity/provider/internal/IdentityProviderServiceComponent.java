@@ -30,8 +30,6 @@ import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
 import org.wso2.carbon.identity.core.util.IdentityCoreInitializedEvent;
-import org.wso2.carbon.identity.provider.IdentityAttributeService;
-import org.wso2.carbon.identity.provider.IdentityAttributeServiceStore;
 import org.wso2.carbon.identity.provider.openid.listener.IdentityOpenIDUserEventListener;
 import org.wso2.carbon.registry.core.service.RegistryService;
 import org.wso2.carbon.user.core.UserRealm;
@@ -216,31 +214,6 @@ public class IdentityProviderServiceComponent {
 
         if (log.isDebugEnabled()) {
             log.debug("ReleamService is unset in Identity Provider Service Bundle");
-        }
-    }
-
-    @Reference(
-            name = "identity.attribute.service",
-            service = org.wso2.carbon.identity.provider.IdentityAttributeService.class,
-            cardinality = ReferenceCardinality.MULTIPLE,
-            policy = ReferencePolicy.DYNAMIC,
-            unbind = "removeAttributeService")
-    protected void addAttributeService(IdentityAttributeService attributeService) {
-
-        if (log.isDebugEnabled()) {
-            log.debug("IdentityAttributeService added in Identity Provider bundle");
-        }
-        IdentityAttributeServiceStore.addAttributeService(attributeService);
-    }
-
-    /**
-     * @param attributeService
-     */
-    protected void removeAttributeService(IdentityAttributeService attributeService) {
-
-        if (log.isDebugEnabled()) {
-            log.debug("IdentityAttributeService removed in Identity Provider bundle");
-            IdentityAttributeServiceStore.removeAttributeService(attributeService);
         }
     }
 
