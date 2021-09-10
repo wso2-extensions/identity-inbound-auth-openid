@@ -194,6 +194,11 @@
                 <artifactId>asm-all</artifactId>
                 <version>${org.ow2.asm.asm.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>${org.ow2.asm.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.felix</groupId>
@@ -355,11 +360,12 @@
 
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
         <jdom.wso2.version>1.0.0.wso2v1</jdom.wso2.version>
-        <json-smart.version>2.3</json-smart.version>
+        <json-smart.version>2.4.7</json-smart.version>
         <tomcat-servlet-api.version>7.0.81.wso2v1</tomcat-servlet-api.version>
         <net.minidev.json.imp.pkg.version.range>[2.3.0, 3.0.0)</net.minidev.json.imp.pkg.version.range>
-        <net.minidev.accessors-smart.version>1.2</net.minidev.accessors-smart.version>
+        <net.minidev.accessors-smart.version>2.4.7</net.minidev.accessors-smart.version>
         <org.ow2.asm.asm.version>5.2</org.ow2.asm.asm.version>
+        <org.ow2.asm.version>9.2</org.ow2.asm.version>
 
         <!--Maven Plugin Version-->
         <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
