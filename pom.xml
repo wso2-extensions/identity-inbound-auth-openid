@@ -191,8 +191,8 @@
             </dependency>
             <dependency>
                 <groupId>org.ow2.asm</groupId>
-                <artifactId>asm</artifactId>
-                <version>${org.ow2.asm.version}</version>
+                <artifactId>asm-all</artifactId>
+                <version>${org.ow2.asm.asm.version}</version>
             </dependency>
 
             <dependency>
@@ -350,16 +350,16 @@
         <joda.wso2.version>2.9.4.wso2v1</joda.wso2.version>
         <joda.wso2.osgi.version.range>[2.8.2,3.0.0)</joda.wso2.osgi.version.range>
 
-        <openid4java.wso2.version>1.0.0.wso2v5</openid4java.wso2.version>
+        <openid4java.wso2.version>1.0.0.wso2v4</openid4java.wso2.version>
         <openid4java.wso2.osgi.version.range>[1.0.0,2.0.0)</openid4java.wso2.osgi.version.range>
 
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
         <jdom.wso2.version>1.0.0.wso2v1</jdom.wso2.version>
-        <json-smart.version>2.4.7</json-smart.version>
+        <json-smart.version>2.3</json-smart.version>
         <tomcat-servlet-api.version>7.0.81.wso2v1</tomcat-servlet-api.version>
         <net.minidev.json.imp.pkg.version.range>[2.3.0, 3.0.0)</net.minidev.json.imp.pkg.version.range>
-        <net.minidev.accessors-smart.version>2.4.7</net.minidev.accessors-smart.version>
-        <org.ow2.asm.version>9.2</org.ow2.asm.version>
+        <net.minidev.accessors-smart.version>1.2</net.minidev.accessors-smart.version>
+        <org.ow2.asm.asm.version>5.2</org.ow2.asm.asm.version>
 
         <!--Maven Plugin Version-->
         <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>

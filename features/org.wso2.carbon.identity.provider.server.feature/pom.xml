@@ -63,7 +63,7 @@
         </dependency>
         <dependency>
             <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
+            <artifactId>asm-all</artifactId>
         </dependency>
     </dependencies>
 
@@ -124,7 +124,7 @@
                                 <bundleDef>net.sf.ehcache.wso2:ehcache</bundleDef>
                                 <bundleDef>net.minidev:json-smart</bundleDef>
                                 <bundleDef>net.minidev:accessors-smart:${net.minidev.accessors-smart.version}</bundleDef>
-                                <bundleDef>org.ow2.asm:asm:${org.ow2.asm.version}</bundleDef>
+                                <bundleDef>org.ow2.asm:asm-all:${org.ow2.asm.asm.version}</bundleDef>
                             </bundles>
                             <importBundles>
                                 <importBundleDef>com.google.step2.wso2:step2</importBundleDef>
