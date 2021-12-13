@@ -355,7 +355,7 @@
         <joda.wso2.version>2.9.4.wso2v1</joda.wso2.version>
         <joda.wso2.osgi.version.range>[2.8.2,3.0.0)</joda.wso2.osgi.version.range>
 
-        <openid4java.wso2.version>1.0.0.wso2v4</openid4java.wso2.version>
+        <openid4java.wso2.version>1.0.0.wso2v5</openid4java.wso2.version>
         <openid4java.wso2.osgi.version.range>[1.0.0,2.0.0)</openid4java.wso2.osgi.version.range>
 
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
