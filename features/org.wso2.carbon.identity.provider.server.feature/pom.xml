@@ -130,7 +130,6 @@
                             <importBundles>
                                 <importBundleDef>com.google.step2.wso2:step2</importBundleDef>
                                 <importBundleDef>com.google.guice.wso2:guice</importBundleDef>
-                                <importBundleDef>jdom.wso2:jdom</importBundleDef>
                                 <importBundleDef>com.google.guava:guava</importBundleDef>
                             </importBundles>
                             <importFeatures>
