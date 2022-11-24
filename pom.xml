@@ -299,7 +299,7 @@
     <properties>
         <!-- Identity Inbound Auth Openid Version-->
         <identity.inbound.auth.openid.exp.pkg.version>${project.version}</identity.inbound.auth.openid.exp.pkg.version>
-        <identity.inbound.auth.openid.imp.pkg.version.range>[5.4.0, 6.0.0)</identity.inbound.auth.openid.imp.pkg.version.range>
+        <identity.inbound.auth.openid.imp.pkg.version.range>[6.0.0, 7.0.0)</identity.inbound.auth.openid.imp.pkg.version.range>
 
         <!-- OSGi/Equinox dependency version -->
         <equinox.javax.servlet.version>3.0.0.v201112011016</equinox.javax.servlet.version>
@@ -314,8 +314,8 @@
         <carbon.kernel.registry.imp.pkg.version.range>[1.0.1, 2.0.0)</carbon.kernel.registry.imp.pkg.version.range>
 
         <!-- Carbon Identity Framework version -->
-        <carbon.identity.framework.version>5.18.0</carbon.identity.framework.version>
-        <carbon.identity.framework.imp.pkg.version.range>[5.15.0, 6.0.0)</carbon.identity.framework.imp.pkg.version.range>
+        <carbon.identity.framework.version>6.0.0</carbon.identity.framework.version>
+        <carbon.identity.framework.imp.pkg.version.range>[6.0.0, 7.0.0)</carbon.identity.framework.imp.pkg.version.range>
 
         <!--Carbon component version-->
         <carbon.base.imp.pkg.version.range>[1.0.0, 2.0.0)</carbon.base.imp.pkg.version.range>
