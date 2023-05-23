@@ -599,7 +599,7 @@ public class OpenIDProviderService {
             rpdo.setTrustedAlways(rpdto.isTrustedAlways());
             rpdo.setDefaultProfileName(rpdto.getDefaultProfileName());
 
-            MessageDigest sha = MessageDigest.getInstance("SHA-1");
+            MessageDigest sha = MessageDigest.getInstance("SHA-256");
             byte[] digest = sha.digest((userName + ":" + rpdto.getRpUrl()).getBytes());
             rpdo.setUuid(new String(Hex.encodeHex(digest)));
 
