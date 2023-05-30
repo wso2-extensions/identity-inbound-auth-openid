@@ -42,7 +42,7 @@ import java.util.Date;
 public class OpenIDServerAssociationStore extends InMemoryServerAssociationStore {
 
     private static final Log log = LogFactory.getLog(OpenIDServerAssociationStore.class);
-    private static final String SHA_1_PRNG = "SHA1PRNG";
+    private static final String DRBG = "DRBG";
     private int storeId = 0;
     private String timestamp;
     private int counter;
@@ -57,10 +57,10 @@ public class OpenIDServerAssociationStore extends InMemoryServerAssociationStore
      */
     public OpenIDServerAssociationStore(String associationsType) {
         try {
-            SecureRandom secureRandom = SecureRandom.getInstance(SHA_1_PRNG);
+            SecureRandom secureRandom = SecureRandom.getInstance(DRBG);
             storeId = secureRandom.nextInt(9999);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("SHA1PRNG algorithm could not be found.", e);
+            throw new RuntimeException("DRBG algorithm could not be found.", e);
         }
         timestamp = Long.toString(new Date().getTime());
         counter = 0;
