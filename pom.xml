@@ -354,7 +354,7 @@
         <openid4java.wso2.osgi.version.range>[1.0.0,2.0.0)</openid4java.wso2.osgi.version.range>
 
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
-        <json-smart.version>2.4.7</json-smart.version>
+        <json-smart.version>2.4.10</json-smart.version>
         <tomcat-servlet-api.version>7.0.81.wso2v1</tomcat-servlet-api.version>
         <net.minidev.json.imp.pkg.version.range>[2.3.0, 3.0.0)</net.minidev.json.imp.pkg.version.range>
         <net.minidev.accessors-smart.version>2.4.7</net.minidev.accessors-smart.version>
