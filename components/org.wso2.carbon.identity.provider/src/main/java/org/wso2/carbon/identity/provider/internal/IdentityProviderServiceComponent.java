@@ -37,7 +37,6 @@ import org.wso2.carbon.user.core.listener.UserOperationEventListener;
 import org.wso2.carbon.user.core.service.RealmService;
 import org.wso2.carbon.utils.ConfigurationContextService;
 
-import javax.servlet.ServletContext;
 
 @Component(
         name = "identity.provider.component",
@@ -133,8 +132,6 @@ public class IdentityProviderServiceComponent {
             IdentityOpenIDUserEventListener openIDUserListener = new IdentityOpenIDUserEventListener();
             userEventServiceRegistration = ctxt.getBundleContext().registerService(UserOperationEventListener.class
                     .getName(), openIDUserListener, null);
-            String filter = "(objectclass=" + ServletContext.class.getName() + ")";
-            ctxt.getBundleContext().addServiceListener(new ServletContextListener(ctxt.getBundleContext()), filter);
         } catch (Throwable e) {
             log.error("Failed to initialize Identity Provider", e);
         }
