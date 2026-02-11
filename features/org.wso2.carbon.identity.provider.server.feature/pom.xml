@@ -39,7 +39,7 @@
         </dependency>
         <dependency>
             <groupId>org.wso2.orbit.org.openid4java</groupId>
-            <artifactId>openid4java</artifactId>
+            <artifactId>openid4java-jdk21</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.guice.wso2</groupId>
@@ -119,7 +119,7 @@
                             </adviceFile>
                             <bundles>
                                 <bundleDef>org.wso2.carbon.identity.inbound.auth.openid:org.wso2.carbon.identity.provider</bundleDef>
-                                <bundleDef>org.wso2.orbit.org.openid4java:openid4java</bundleDef>
+                                <bundleDef>org.wso2.orbit.org.openid4java:openid4java-jdk21</bundleDef>
                                 <bundleDef>org.wso2.orbit.joda-time:joda-time</bundleDef>
                                 <bundleDef>net.sf.ehcache.wso2:ehcache</bundleDef>
                                 <bundleDef>net.minidev:json-smart</bundleDef>
