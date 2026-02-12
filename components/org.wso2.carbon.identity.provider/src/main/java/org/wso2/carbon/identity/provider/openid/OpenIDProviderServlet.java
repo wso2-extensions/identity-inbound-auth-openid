@@ -19,10 +19,11 @@ package org.wso2.carbon.identity.provider.openid;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.osgi.service.component.annotations.Component;
 import org.wso2.carbon.identity.base.IdentityException;
-import org.wso2.carbon.identity.core.util.IdentityUtil;
 import org.wso2.carbon.identity.provider.openid.handlers.OpenIDHandler;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +33,13 @@ import java.io.IOException;
 /**
  * This Servlet is the OpenID Provider endpoint
  */
+@Component(
+        service = Servlet.class,
+        immediate = true,
+        property = {
+                "osgi.http.whiteboard.servlet.pattern=/openidserver"
+        }
+)
 public class OpenIDProviderServlet extends HttpServlet {
 
     private static final long serialVersionUID = 58052109007507494L;
