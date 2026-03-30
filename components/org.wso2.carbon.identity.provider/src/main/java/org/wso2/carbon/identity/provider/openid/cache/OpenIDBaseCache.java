@@ -60,6 +60,19 @@ public abstract class OpenIDBaseCache<K extends OpenIDCacheKey, V extends OpenID
     }
 
     /**
+     * Add a cache entry during a read-path cache population (cache-aside pattern).
+     * 
+     * @param key   Key which cache entry is indexed.
+     * @param entry Actual object where cache entry is placed.
+     */
+    public void addToCacheOnRead(K key, V entry) {
+        Cache<K, V> cache = getOpenIDCache();
+        if (cache != null) {
+            cache.putOnRead(key, entry);
+        }
+    }
+
+    /**
      * Retrieves a cache entry.
      *
      * @param key CacheKey
