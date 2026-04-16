@@ -66,6 +66,7 @@ public abstract class OpenIDBaseCache<K extends OpenIDCacheKey, V extends OpenID
      * @param entry Actual object where cache entry is placed.
      */
     public void addToCacheOnRead(K key, V entry) {
+        
         Cache<K, V> cache = getOpenIDCache();
         if (cache != null) {
             cache.putOnRead(key, entry);

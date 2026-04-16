@@ -142,7 +142,7 @@ public class OpenIDServerAssociationStore extends InMemoryServerAssociationStore
             return null;
 
         } else if (chacheMiss) {
-            // add the missing entry to the cache without triggering cluster invalidation
+            // Update cache using the dedicated read-path method.
             cache.addToCacheOnRead(association);
         }
 
