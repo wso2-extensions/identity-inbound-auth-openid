@@ -72,6 +72,28 @@ public class OpenIDAssociationCache extends OpenIDBaseCache<OpenIDIdentityCacheK
     }
 
     /**
+     * Add the entry to the cache during a read-path cache population (cache-aside pattern).
+     * Does not trigger a cache invalidation broadcast to cluster members before inserting,
+     * preventing redundant invalidations when populating the cache after a DB read.
+     *
+     * @param association
+     */
+    public void addToCacheOnRead(Association association) {
+
+        if (association == null) {
+            throw new IllegalArgumentException("Association is \'Null\'");
+        }
+        OpenIDIdentityCacheKey cacheKey = new OpenIDIdentityCacheKey(0, association.getHandle());
+        OpenIDIdentityCacheEntry cacheEntry =
+                new OpenIDIdentityCacheEntry(association.getType(), association.getMacKey(),
+                                             association.getExpiry());
+        associationCache.addToCacheOnRead(cacheKey, cacheEntry);
+        if (log.isDebugEnabled()) {
+            log.debug("[AddToCacheOnRead] New entry is added to cache for handle : " + association.getHandle());
+        }
+    }
+
+    /**
      * Read entries from the cache. If no value found then returns null.
      * If the association is expired then returns null.
      * Else returns the <code>Association</code>

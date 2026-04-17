@@ -142,8 +142,8 @@ public class OpenIDServerAssociationStore extends InMemoryServerAssociationStore
             return null;
 
         } else if (chacheMiss) {
-            // add the missing entry to the cache
-            cache.addToCache(association);
+            // Update cache using the dedicated read-path method.
+            cache.addToCacheOnRead(association);
         }
 
         return association;
