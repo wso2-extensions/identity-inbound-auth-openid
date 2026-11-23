@@ -354,12 +354,12 @@
         <openid4java.wso2.osgi.version.range>[1.0.0,2.0.0)</openid4java.wso2.osgi.version.range>
 
         <ehcache.version>1.5.0.wso2v3</ehcache.version>
-        <json-smart.version>2.4.10</json-smart.version>
+        <json-smart.version>2.6.1</json-smart.version>
         <tomcat-servlet-api.version>7.0.81.wso2v1</tomcat-servlet-api.version>
         <net.minidev.json.imp.pkg.version.range>[2.3.0, 3.0.0)</net.minidev.json.imp.pkg.version.range>
-        <net.minidev.accessors-smart.version>2.4.7</net.minidev.accessors-smart.version>
+        <net.minidev.accessors-smart.version>2.6.1</net.minidev.accessors-smart.version>
         <org.ow2.asm.asm.version>5.2</org.ow2.asm.asm.version>
-        <org.ow2.asm.version>9.2</org.ow2.asm.version>
+        <org.ow2.asm.version>9.11.1</org.ow2.asm.version>
 
         <!--Maven Plugin Version-->
         <carbon.p2.plugin.version>1.5.3</carbon.p2.plugin.version>
